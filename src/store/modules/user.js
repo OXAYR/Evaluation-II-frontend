@@ -48,6 +48,8 @@ export default {
         const { data } = await axios.post("/users/authenticate", payload);
         const token = data.data.token;
         console.log("in tge authentication---->", token);
+        localStorage.setItem("user", JSON.stringify(data.data.user));
+        locatStorage.setItem("userAuth", token);
         commit("SET_USER", data.data);
       } catch (error) {
         // if (error.response && error.response.data.errors) {

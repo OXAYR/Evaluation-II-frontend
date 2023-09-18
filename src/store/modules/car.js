@@ -3,137 +3,135 @@ import user from "./user.js";
 export default {
   namespaced: true,
   state: {
-    movie: {
-      movies: [],
+    car: {
+      cars: [],
     },
   },
   getters: {
-    getMovies(state) {
+    getCars(state) {
       console.log("in the movie getter list----> ", state.movie);
       console.log(
         "THee user in the movie module------->",
         user.state.user.token
       );
 
-      return state.movie.movies;
+      return state.car.cars;
     },
-    getSelectedMovie(state) {
-      return state.movie.selectedMovie;
+    getSelectedCar(state) {
+      return state.car.selectedCar;
     },
   },
   mutations: {
-    SET_MOVIE_LIST(state, payload) {
-      console.log("in the movie setter--->", payload.data.movies);
-      state.movie.movies = payload.data.movies;
-      console.log("in the movie setter--->", state.movie.movies);
+    SET_CAR_LIST(state, payload) {
+      console.log("in the movie setter--->", payload.data.cars);
+      state.movie.movies = payload.data.cars;
+      console.log("in the movie setter--->", state.movie.cars);
     },
-    SET_SELECTED_MOVIE(state, payload) {
+    SET_SELECTED_CAR(state, payload) {
       state.movie.selectedMovie = payload;
     },
 
-    REMOVE_MOVIE(state, id) {
+    REMOVE_CAR(state, id) {
       console.log("in the mutatuion", id);
-      state.movie.movies = state.movie.movies.filter(
-        (movie) => movie.id !== id
-      );
+      state.car.cars = state.car.cars.filter((car) => car.id !== id);
     },
-    UPDATE_MOVIE(state, id, data) {
-      const finded = state.movie.movies.find(id);
+    UPDATE_CAR(state, id, data) {
+      const finded = state.car.cars.find(id);
       console.log(finded);
-      state.movie.movies.splice(id, 1, data);
+      state.car.cars.splice(id, 1, data);
     },
   },
   actions: {
-    async createMovies(_, payload) {
+    async createCar(_, payload) {
       try {
         const token = user.state.user.token;
         console.log("token---->");
         const config = {
           headers: {
-            "x-access-token": token,
+            "x-access-token": localStorage.getItem('userAuth'),
             "Content-Type": "application/json",
           },
         };
-        const { data } = await axios.post("/movies", payload, config);
-        console.log("Movie created:", data);
+        const { data } = await axios.post("/cars", payload, config);
+        console.log("car created:", data);
       } catch (error) {
         console.error("Error creating movie:", error);
         alert(error.response.data.message);
       }
     },
 
-    async fetchMoviesById({ commit }) {
+    async fetchCarsById({ commit }) {
       try {
         const token = user.state.user.token;
         console.log("token in the fetch----> ", token);
         const config = {
           headers: {
-            "x-access-token": token,
+            "x-access-token": localStorage.getItem('userAuth'),
             "Content-Type": "application/json",
           },
         };
-        const { data } = await axios.get("/movies/", config);
+        const { data } = await axios.get("/cars/", config);
         console.log(data);
-        commit("SET_MOVIE_LIST", data);
+        commit("SET_CAR_LIST", data);
       } catch (error) {
         console.error("Error fetching movies:", error);
         alert(error.response.data.message);
       }
     },
 
-    async deleteMovie({ commit }, id) {
+    async deleteCar({ commit }, id) {
       try {
         console.log(id);
-        commit("REMOVE_MOVIE", id);
+        commit("REMOVE_CAR", id);
         const token = user.state.user.token;
         console.log("token in the fetch----> ", token);
         const config = {
           headers: {
-            "x-access-token": token,
+            "x-access-token": localStorage.getItem('userAuth'),
             "Content-Type": "application/json",
           },
         };
-        await axios.delete(`/movies/${id}`, config);
+        await axios.delete(`/cars/${id}`, config);
       } catch (error) {
-        console.error("Error deleting todo:", error);
+        console.error("Error deleting car:", error);
         alert(error.response.data.message);
       }
     },
 
-    async updateMovie(_, { indx, updateMovie }) {
+    async updateCar(_, { indx, updateCar }) {
       try {
         console.log("in the update movie----> ", indx);
         const token = user.state.user.token;
         console.log("token in the update----> ", token);
         const config = {
           headers: {
-            "x-access-token": token,
+            "x-access-token": localStorage.getItem('userAuth'),
             "Content-Type": "application/json",
           },
         };
-        console.log("indx----->", indx, updateMovie);
-        await axios.put(`/movies/${indx}`, updateMovie, config);
+        console.log("indx----->", indx, updateCar);
+        await axios.put(`/cars/${indx}`, updateCar, config);
       } catch (error) {
         console.error("Error deleting todo:", error);
         alert(error.response.data.message);
       }
     },
 
-    async fetchMovies({ commit }) {
+    async fetchCars({ commit }) {
       try {
         const token = user.state.user.token;
         console.log("token in the fetch----> ", token);
         const config = {
           headers: {
-            "x-access-token": token,
+            "x-access-token": localStorage.getItem('userAuth'),
             "Content-Type": "application/json",
           },
         };
-        const { data } = await axios.get("/movies", config);
+        const { data } = await axios.get("/cars", config);
         console.log(data);
-        commit("SET_MOVIE_LIST", data);
+        commit("SET_CAR_LIST", data);
       } catch (error) {
-        console.error("Error fetching movies:", error);
+        console.error("Error fetching cars:", error);
         alert(error.response.data.message);
       }
     },

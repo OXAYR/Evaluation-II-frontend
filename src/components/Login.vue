@@ -20,7 +20,7 @@
     </p> -->
     <button
       class="mt-4 px-12 py-2 sm:px-24 sm:py-3 bg-blue text-white hover:bg-lightBlue rounded-full"
-      @click="toValidate(formLogin)">
+      @click="toValidateForm(formLogin)">
       <p class="text-white font-serif text-center">Login</p>
     </button>
 
@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
@@ -46,9 +46,7 @@ const formLogin = ref({
 const store = useStore();
 const router = useRouter();
 
-const validationErrors = computed(() => store.state.user.validationErrors);
-
-const toValidate = async () => {
+const toValidateForm = async () => {
   if (formLogin.value.email !== "" && formLogin.value.password !== "") {
     await store.dispatch("user/authenticateUser", formLogin.value);
     router.push("/admin");

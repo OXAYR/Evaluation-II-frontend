@@ -3,53 +3,53 @@ import user from "./user.js";
 export default {
   namespaced: true,
   state: {
-    cart: {
+    reservation: {
       bookings: [],
     },
   },
   getters: {
-    getCart(state) {
-      console.log("IN the getter of cart-----> ", state);
-      return state.cart.bookings;
+    getReservation(state) {
+      console.log("IN the getter of reservation-----> ", state);
+      return state.reservation.bookings;
     },
-    getCartLength(state) {
-      return state.cart.bookings.length;
+    getReservationLength(state) {
+      return state.reservation.bookings.length;
     },
   },
   mutations: {
-    SET_CART(state, cart) {
-      console.log("Cart in the setter ", cart);
-      state.cart.bookings = cart;
+    SET_RESERVATION(state, reservation) {
+      console.log("reservation in the setter ", reservation);
+      state.reservation.bookings = reservation;
     },
-    DELETE_CART_EL(state, cart) {
-      state.cart = cart;
+    DELETE_RESERVATION_EL(state, reservation) {
+      state.reservation = reservation;
     },
   },
   actions: {
-    async createCart(_, payload) {
+    async createReservation(_, payload) {
       try {
         const { _id } = JSON.parse(localStorage.getItem("user"));
         const token = user.state.user.token;
         console.log(
-          "root state user in the cart------>",
+          "root state user in the reservation------>",
           user.state.user.token
         );
         console.log("token---->", token, _id);
         console.log("payload---->", payload, payload.released_on);
         //const {id, released_on} = payload
         const newPayload = { userId, ...payload };
-        console.log("In the cart new payload------> ", newPayload);
+        console.log("In the reservation new payload------> ", newPayload);
         const config = {
           headers: {
             "x-access-token": localStorage.getItem("userAuth"),
             "Content-Type": "application/json",
           },
         };
-        const { data } = await axios.post("/cart", newPayload, config);
-        console.log("Cart created:", data);
+        const { data } = await axios.post("/reservation", newPayload, config);
+        console.log("reservation created:", data);
         alert(data.message);
       } catch (error) {
-        //console.error("Error creating cart:", error.response.data.message);
+        //console.error("Error creating reservation:", error.response.data.message);
         alert(error.response.data.message);
       }
     },
@@ -67,23 +67,23 @@ export default {
         };
         const newPayload = { userId: _id, tickets: ticketCount };
         console.log(
-          "In the update ticket cart new payload------> ",
+          "In the update ticket reservation new payload------> ",
           newPayload
         );
 
         const { data } = await axios.put(
-          `/cart/updatetickets/${movieId}`,
+          `/reservation/updatetickets/${movieId}`,
           newPayload,
           config
         );
-        console.log("in the get cart----> ", data.data.cart.items);
-        commit("SET_CART", data.data.cart.items);
+        console.log("in the get reservation----> ", data.data.reservation.items);
+        commit("SET_reservation", data.data.reservation.items);
       } catch (error) {
         //console.log(error)
       }
     },
 
-    async getTheCart({ commit }) {
+    async getTheReservation({ commit }) {
       try {
         const { _id } = JSON.parse(localStorage.getItem("user"));
         const config = {
@@ -92,18 +92,18 @@ export default {
             "Content-Type": "application/json",
           },
         };
-        const { data } = await axios.get(`/cart/${_id}`, config);
-        console.log("in the get cart----> ", data.data.cart.items);
-        commit("SET_CART", data.data.cart.items);
+        const { data } = await axios.get(`/reservation/${_id}`, config);
+        console.log("in the get reservation----> ", data.data.reservation.items);
+        commit("SET_reservation", data.data.reservation.items);
       } catch (error) {
-        //console.error("Error fetching cart:", error);
+        //console.error("Error fetching reservation:", error);
         //alert(error.response.data.message);
       }
     },
 
-    async deleteCartEl({ commit }, id) {
+    async deleteReservationEl({ commit }, id) {
       try {
-        console.log("payload in action removeToCart", id);
+        console.log("payload in action removeToreservation", id);
         const { _id } = JSON.parse(localStorage.getItem("user"));
         const config = {
           headers: {
@@ -112,11 +112,11 @@ export default {
           },
         };
         // console.log('config ',config)
-        const { data } = await axios.delete(`/cart/${id}`, config, _id);
-        console.log("RESPONSE RECIEVED From remove cart", data.data.cart.items);
-        commit("SET_CART", data.data.cart.items);
+        const { data } = await axios.delete(`/reservation/${id}`, config, _id);
+        console.log("RESPONSE RECIEVED From remove reservation", data.data.reservation.items);
+        commit("SET_reservation", data.data.reservation.items);
       } catch (error) {
-        console.error("Error deleting item from cart:", error);
+        console.error("Error deleting item from reservation:", error);
         //alert(error.response.data.message);
       }
     },

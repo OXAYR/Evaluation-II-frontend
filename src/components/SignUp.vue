@@ -36,14 +36,14 @@
     </p>
     <button
       class="mt-4 px-4 sm:px-8 py-2 sm:py-3 text-white bg-blue hover:bg-lightBlue rounded-full"
-      @click="toStore(form)">
+      @click="toValidateForm(form)">
       Register
     </button>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
@@ -51,20 +51,49 @@ const form = ref({
   name: "",
   email: "",
   password: "",
+});
+
+const confirmPassword = ref("");
+const validationErrors = ref({
+  name: "",
+  password: "",
+  email: "",
   confirmPassword: "",
 });
 
 const store = useStore();
 const router = useRouter();
 
-const validationErrors = computed(() => store.state.user.validationErrors);
+const toValidateForm = (obj) => {
+  validationErrors.value = [];
+  const usernamePattern = /^(?=.*[0-9!@#$%^&*()_+{}[\]:;<>,.?~\\/\\-='|"'])\S+/;
+  const passwordPattern =
+    /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}[\]:;<>,.?~\\/\\-='|"']).{8,}$/;
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-const toStore = async () => {
+  if (obj.username !== "" && !usernamePattern.test(obj.username)) {
+    validationErrors.name.value.push(
+      "Add a number in the name and remove empty spaces"
+    );
+  } else if (obj.password !== "" && !passwordPattern.test(obj.password)) {
+    validationErrors.password.value.push(
+      "Password must start with a capital letter and must contain a number & special character"
+    );
+  } else if (obj.password !== confirmPassword.value) {
+    validationErrors.confirmPassword.value.push("Password does not match");
+  } else if (obj.email !== "" && !emailPattern.test(obj.email)) {
+    validationErrors.email.value.push("Invalid Email");
+  } else {
+    toStoreForm(obj);
+  }
+};
+
+const toStoreForm = async (obj) => {
   if (
-    form.value.email !== "" &&
-    form.value.password !== "" &&
-    form.value.name !== "" &&
-    form.value.confirmPassword !== ""
+    obj.value.email !== "" &&
+    obj.value.password !== "" &&
+    obj.value.name !== "" &&
+    obj.value.confirmPassword !== ""
   ) {
     console.log("In the component to store--->", form.value);
     await store.dispatch("user/registerUser", form.value);

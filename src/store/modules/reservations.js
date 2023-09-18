@@ -28,20 +28,20 @@ export default {
   actions: {
     async createCart(_, payload) {
       try {
-        const userId = user.state.user.user._id;
+        const { _id } = JSON.parse(localStorage.getItem("user"));
         const token = user.state.user.token;
         console.log(
           "root state user in the cart------>",
           user.state.user.token
         );
-        console.log("token---->", token, userId);
+        console.log("token---->", token, _id);
         console.log("payload---->", payload, payload.released_on);
         //const {id, released_on} = payload
         const newPayload = { userId, ...payload };
         console.log("In the cart new payload------> ", newPayload);
         const config = {
           headers: {
-            "x-access-token": token,
+            "x-access-token": localStorage.getItem("userAuth"),
             "Content-Type": "application/json",
           },
         };
@@ -58,15 +58,14 @@ export default {
       try {
         console.log("payload in the update Tickets---->", payload);
         const { movieId, ticketCount } = payload;
-        const userId = user.state.user.user._id;
-        const token = user.state.user.token;
+        const { _id } = JSON.parse(localStorage.getItem("user"));
         const config = {
           headers: {
-            "x-access-token": token,
+            "x-access-token": localStorage.getItem("userAuth"),
             "Content-Type": "application/json",
           },
         };
-        const newPayload = { userId: userId, tickets: ticketCount };
+        const newPayload = { userId: _id, tickets: ticketCount };
         console.log(
           "In the update ticket cart new payload------> ",
           newPayload
@@ -86,18 +85,14 @@ export default {
 
     async getTheCart({ commit }) {
       try {
-        const token = user.state.user.token;
-        console.log("token in the fetch of getCart----> ", token);
+        const { _id } = JSON.parse(localStorage.getItem("user"));
         const config = {
           headers: {
-            "x-access-token": token,
+            "x-access-token": localStorage.getItem("userAuth"),
             "Content-Type": "application/json",
           },
         };
-        const { data } = await axios.get(
-          `/cart/${user.state.user.user._id}`,
-          config
-        );
+        const { data } = await axios.get(`/cart/${_id}`, config);
         console.log("in the get cart----> ", data.data.cart.items);
         commit("SET_CART", data.data.cart.items);
       } catch (error) {
@@ -109,16 +104,15 @@ export default {
     async deleteCartEl({ commit }, id) {
       try {
         console.log("payload in action removeToCart", id);
-        const userId = user.state.user.user._id;
-        const token = user.state.user.token;
+        const { _id } = JSON.parse(localStorage.getItem("user"));
         const config = {
           headers: {
-            "x-access-token": token,
+            "x-access-token": localStorage.getItem("userAuth"),
             "Content-Type": "application/json",
           },
         };
         // console.log('config ',config)
-        const { data } = await axios.delete(`/cart/${id}`, config, userId);
+        const { data } = await axios.delete(`/cart/${id}`, config, _id);
         console.log("RESPONSE RECIEVED From remove cart", data.data.cart.items);
         commit("SET_CART", data.data.cart.items);
       } catch (error) {

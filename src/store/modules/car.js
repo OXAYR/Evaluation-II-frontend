@@ -6,6 +6,9 @@ export default {
     car: {
       cars: [],
     },
+    filetedCar: {
+      cars: [],
+    },
   },
   getters: {
     getCars(state) {
@@ -18,17 +21,17 @@ export default {
       return state.car.cars;
     },
     getSelectedCar(state) {
-      return state.car.selectedCar;
+      return state.filetedCar.cars;
     },
   },
   mutations: {
     SET_CAR_LIST(state, payload) {
       console.log("in the movie setter--->", payload.data.cars);
-      state.movie.movies = payload.data.cars;
+      state.car.cars = payload.data.cars;
       console.log("in the movie setter--->", state.movie.cars);
     },
-    SET_SELECTED_CAR(state, payload) {
-      state.movie.selectedMovie = payload;
+    SET_FILTERED_CAR(state, payload) {
+      state.filetedCar.cars = payload;
     },
 
     REMOVE_CAR(state, id) {
@@ -48,7 +51,7 @@ export default {
         console.log("token---->");
         const config = {
           headers: {
-            "x-access-token": localStorage.getItem('userAuth'),
+            "x-access-token": localStorage.getItem("userAuth"),
             "Content-Type": "application/json",
           },
         };
@@ -66,7 +69,7 @@ export default {
         console.log("token in the fetch----> ", token);
         const config = {
           headers: {
-            "x-access-token": localStorage.getItem('userAuth'),
+            "x-access-token": localStorage.getItem("userAuth"),
             "Content-Type": "application/json",
           },
         };
@@ -74,7 +77,7 @@ export default {
         console.log(data);
         commit("SET_CAR_LIST", data);
       } catch (error) {
-        console.error("Error fetching movies:", error);
+        console.error("Error fetching cars:", error);
         alert(error.response.data.message);
       }
     },
@@ -87,7 +90,7 @@ export default {
         console.log("token in the fetch----> ", token);
         const config = {
           headers: {
-            "x-access-token": localStorage.getItem('userAuth'),
+            "x-access-token": localStorage.getItem("userAuth"),
             "Content-Type": "application/json",
           },
         };
@@ -105,14 +108,14 @@ export default {
         console.log("token in the update----> ", token);
         const config = {
           headers: {
-            "x-access-token": localStorage.getItem('userAuth'),
+            "x-access-token": localStorage.getItem("userAuth"),
             "Content-Type": "application/json",
           },
         };
         console.log("indx----->", indx, updateCar);
         await axios.put(`/cars/${indx}`, updateCar, config);
       } catch (error) {
-        console.error("Error deleting todo:", error);
+        console.error("Error updating car:", error);
         alert(error.response.data.message);
       }
     },
@@ -123,7 +126,7 @@ export default {
         console.log("token in the fetch----> ", token);
         const config = {
           headers: {
-            "x-access-token": localStorage.getItem('userAuth'),
+            "x-access-token": localStorage.getItem("userAuth"),
             "Content-Type": "application/json",
           },
         };

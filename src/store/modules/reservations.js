@@ -26,7 +26,7 @@ export default {
     },
   },
   actions: {
-    async createReservation(_, payload) {
+    async makeAReservation(_, payload) {
       try {
         const { _id } = JSON.parse(localStorage.getItem("user"));
         const token = user.state.user.token;
@@ -41,7 +41,7 @@ export default {
         console.log("In the reservation new payload------> ", newPayload);
         const config = {
           headers: {
-            "x-access-token": localStorage.getItem("userAuth"),
+            "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
             "Content-Type": "application/json",
           },
         };
@@ -61,7 +61,7 @@ export default {
         const { _id } = JSON.parse(localStorage.getItem("user"));
         const config = {
           headers: {
-            "x-access-token": localStorage.getItem("userAuth"),
+            "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
             "Content-Type": "application/json",
           },
         };
@@ -76,7 +76,10 @@ export default {
           newPayload,
           config
         );
-        console.log("in the get reservation----> ", data.data.reservation.items);
+        console.log(
+          "in the get reservation----> ",
+          data.data.reservation.items
+        );
         commit("SET_reservation", data.data.reservation.items);
       } catch (error) {
         //console.log(error)
@@ -88,12 +91,15 @@ export default {
         const { _id } = JSON.parse(localStorage.getItem("user"));
         const config = {
           headers: {
-            "x-access-token": localStorage.getItem("userAuth"),
+            "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
             "Content-Type": "application/json",
           },
         };
         const { data } = await axios.get(`/reservation/${_id}`, config);
-        console.log("in the get reservation----> ", data.data.reservation.items);
+        console.log(
+          "in the get reservation----> ",
+          data.data.reservation.items
+        );
         commit("SET_reservation", data.data.reservation.items);
       } catch (error) {
         //console.error("Error fetching reservation:", error);
@@ -107,13 +113,16 @@ export default {
         const { _id } = JSON.parse(localStorage.getItem("user"));
         const config = {
           headers: {
-            "x-access-token": localStorage.getItem("userAuth"),
+            "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
             "Content-Type": "application/json",
           },
         };
         // console.log('config ',config)
         const { data } = await axios.delete(`/reservation/${id}`, config, _id);
-        console.log("RESPONSE RECIEVED From remove reservation", data.data.reservation.items);
+        console.log(
+          "RESPONSE RECIEVED From remove reservation",
+          data.data.reservation.items
+        );
         commit("SET_reservation", data.data.reservation.items);
       } catch (error) {
         console.error("Error deleting item from reservation:", error);

@@ -92,7 +92,7 @@
         </div>
         <p v-if="error.length" class="text-red-600 text-sm">{{ error }}</p>
         <button
-          class="mt-4 w-full py-2 bg-lightBlue font-bold rounded-full text-black font-serif bg-yellow-300 hover:bg-yellow-400"
+          class="mt-4 w-full py-2 bg-lightBlue font-bold rounded text-black font-serif bg-yellow-300 hover:bg-yellow-400"
           @click="validateCar()">
           Create
         </button>

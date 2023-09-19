@@ -5,23 +5,23 @@
 
       <div class="mb-4">
         <label class="block font-semibold mb-2">Name:</label>
-        <p class="bg-grey p-2 rounded">{{ user.user.name }}</p>
+        <p class="bg-gray-200 p-2 rounded">{{ name }}</p>
       </div>
 
       <div class="mb-4">
         <label class="block font-semibold mb-2">Email:</label>
-        <p class="bg-grey p-2 rounded">{{ user.user.email }}</p>
+        <p class="bg-gray-200 p-2 rounded">{{ email }}</p>
       </div>
 
       <button
-        @click="update(user.user._id)"
-        class="bg-blue text-white px-4 py-2 rounded hover:bg-blue mr-2">
+        @click="update(_id)"
+        class="bg-yellow-300 text-black px-4 py-2 rounded-lg hover:bg-yellow-400 mr-2">
         Edit
       </button>
 
       <button
-        @click="deleteUserAccount(user.user._id)"
-        class="bg-red text-white px-4 py-2 rounded hover:bg-red">
+        @click="deleteUserAccount(_id)"
+        class="bg-red-400 text-black px-4 py-2 rounded-lg hover:bg-red-500">
         Delete Account
       </button>
     </div>
@@ -35,11 +35,11 @@ import { useStore } from "vuex";
 const store = useStore();
 const router = useRouter();
 
-const user = store.getters["user/getUser"];
+const { name, email, _id } = JSON.parse(localStorage.getItem("user"));
 
 const update = (index) => {
   console.log("sending in params----->", index);
-  router.push({ path: `/home/${index}/updateUser` });
+  router.push({ path: `/home/account/${index}` });
 };
 
 const deleteUserAccount = (index) => {

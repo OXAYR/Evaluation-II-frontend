@@ -1,24 +1,25 @@
 <template>
   <div>
-    <nav
-      class="bg-navblue py-5 shadow-md fixed top-0 left-0 right-0 font-serif">
+    <nav class="bg-navblue py-5 fixed top-0 left-0 right-0 font-serif">
       <div class="flex justify-between items-center px-10">
         <div class="flex col-span-7">
           <router-link to="/home">
-            <p class="font-semibold text-xl text-silver ml-5">MovieMesh</p>
+            <p class="font-semibold text-black text-xl text-silver ml-5">
+              CarService
+            </p>
           </router-link>
         </div>
         <div class="flex">
           <router-link
-            to="/home/userAccount"
-            class="text-silver shadow-sm hover:bg-blue hover:text-white rounded p-3 ml-4 mt-1">
+            to="/home/account"
+            class="text-black shadow-sm border border-black hover:bg-black hover:text-white rounded p-2 ml-4 mt-1">
             Account
           </router-link>
-          <router-link
+          <!-- <router-link
             to="/home/cart"
             class="text-silver shadow-sm hover:bg-blue hover:text-white rounded p-3 ml-4 mt-1 mr-4">
             cart
-          </router-link>
+          </router-link> -->
         </div>
       </div>
     </nav>

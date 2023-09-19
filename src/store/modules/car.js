@@ -45,7 +45,7 @@ export default {
     },
   },
   actions: {
-    async createCar(_, payload) {
+    async addCar(_, payload) {
       try {
         const token = user.state.user.token;
         console.log("token---->");

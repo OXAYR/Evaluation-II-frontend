@@ -6,7 +6,7 @@ import car from "./modules/car";
 export default createStore({
   modules: {
     user,
-    cart,
+    reservations,
     car,
   },
 });

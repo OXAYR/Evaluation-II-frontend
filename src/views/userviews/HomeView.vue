@@ -1,6 +1,7 @@
 <template>
   <div>
     <BookACar />
+    <router-view />
   </div>
 </template>
 

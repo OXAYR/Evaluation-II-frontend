@@ -49,7 +49,7 @@ export default {
         const token = data.data.token;
         console.log("in tge authentication---->", token);
         localStorage.setItem("user", JSON.stringify(data.data.user));
-        locatStorage.setItem("userAuth", token);
+        localStorage.setItem("userAuth", token);
         commit("SET_USER", data.data);
       } catch (error) {
         // if (error.response && error.response.data.errors) {

@@ -22,7 +22,7 @@
             >Model</label
           >
           <input
-            type="text"
+            type="date"
             id="model"
             v-model="car.model"
             class="mt-1 p-2 block w-full border border-gray-300 rounded-md"
@@ -109,7 +109,7 @@ const store = useStore();
 
 const car = ref({
   name: "",
-  model: "",
+  model: new Date(),
   rent: null,
   type: "",
   make: "",

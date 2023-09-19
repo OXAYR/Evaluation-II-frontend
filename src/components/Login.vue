@@ -49,7 +49,7 @@ const router = useRouter();
 const toValidateForm = async () => {
   if (formLogin.value.email !== "" && formLogin.value.password !== "") {
     await store.dispatch("user/authenticateUser", formLogin.value);
-    router.push("/admin");
+    router.push("/home");
   }
 };
 </script>

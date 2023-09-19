@@ -1,22 +1,22 @@
 <template>
-  <MovieList :movie="allMovies" @add-ticket="addToCart" />
+  <CarList :cars="allCars" @reserve-car="reserveCar" />
 </template>
 
 <script setup>
-import MovieList from "@/components/user/MovieList.vue";
+import CarList from "@/components/user/CarList.vue";
 import { useStore } from "vuex";
 import { computed, onMounted } from "vue";
 
 const store = useStore();
 
-const allMovies = computed(() => store.getters["movies/getMovies"]);
+const allCars = computed(() => store.getters["car/getCars"]);
 
-const addToCart = (movie) => {
-  console.log("Adding in the cart------------>", movie);
-  store.dispatch("cart/createCart", movie);
+const reserveCar = (car) => {
+  console.log("Adding in the cart------------>", car);
+  store.dispatch("cart/createCart", car);
 };
 
 onMounted(() => {
-  store.dispatch("movies/fetchMovies");
+  store.dispatch("car/fetchCars");
 });
 </script>

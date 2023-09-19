@@ -22,7 +22,7 @@
             >Model</label
           >
           <input
-            type="text"
+            type="date"
             id="model"
             v-model="car.model"
             class="mt-1 p-2 block w-full border border-gray-300 rounded-md"
@@ -109,7 +109,7 @@ const store = useStore();
 
 const car = ref({
   name: "",
-  model: "",
+  model: null,
   rent: null,
   type: "",
   make: "",
@@ -132,14 +132,14 @@ const colorOptions = [
 
 const selectColor = (selectedColor) => {
   console.log("Selected color------->", selectedColor);
-  car.color = selectedColor;
-  console.log("car color------->", car.color);
+  car.value.color = selectedColor;
+  console.log("car color------->", car.value.color);
 };
 const validateCar = () => {
   console.log(car);
   if (
     car.name !== "" &&
-    car.model !== "" &&
+    car.model !== null &&
     car.rent !== null &&
     car.type !== "" &&
     car.make !== "" &&

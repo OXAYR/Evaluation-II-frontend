@@ -12,12 +12,7 @@ export default {
   },
   getters: {
     getCars(state) {
-      console.log("in the movie getter list----> ", state.movie);
-      console.log(
-        "THee user in the movie module------->",
-        user.state.user.token
-      );
-
+      console.log("in the movie getter list----> ", state.car);
       return state.car.cars;
     },
     getSelectedCar(state) {
@@ -26,9 +21,9 @@ export default {
   },
   mutations: {
     SET_CAR_LIST(state, payload) {
-      console.log("in the movie setter--->", payload.data.cars);
+      console.log("in the car setter--->", payload.data.cars);
       state.car.cars = payload.data.cars;
-      console.log("in the movie setter--->", state.movie.cars);
+      console.log("in the car setter--->", state.car.cars);
     },
     SET_FILTERED_CAR(state, payload) {
       state.filetedCar.cars = payload;
@@ -51,7 +46,7 @@ export default {
         console.log("token---->");
         const config = {
           headers: {
-            "x-access-token": localStorage.getItem("userAuth"),
+            "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
             "Content-Type": "application/json",
           },
         };
@@ -69,7 +64,7 @@ export default {
         console.log("token in the fetch----> ", token);
         const config = {
           headers: {
-            "x-access-token": localStorage.getItem("userAuth"),
+            "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
             "Content-Type": "application/json",
           },
         };
@@ -90,7 +85,7 @@ export default {
         console.log("token in the fetch----> ", token);
         const config = {
           headers: {
-            "x-access-token": localStorage.getItem("userAuth"),
+            "x-access-token":JSON.parse(localStorage.getItem("userAuth")),
             "Content-Type": "application/json",
           },
         };
@@ -108,7 +103,7 @@ export default {
         console.log("token in the update----> ", token);
         const config = {
           headers: {
-            "x-access-token": localStorage.getItem("userAuth"),
+            "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
             "Content-Type": "application/json",
           },
         };
@@ -122,11 +117,11 @@ export default {
 
     async fetchCars({ commit }) {
       try {
-        const token = user.state.user.token;
+        const token = JSON.parse(localStorage.getItem("userAuth"));
         console.log("token in the fetch----> ", token);
         const config = {
           headers: {
-            "x-access-token": localStorage.getItem("userAuth"),
+            "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
             "Content-Type": "application/json",
           },
         };

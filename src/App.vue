@@ -25,7 +25,7 @@ body {
 }
 
 body {
-  background-color: #dfdfdf;
+  background-color: #f6f6f6;
 }
 
 nav {

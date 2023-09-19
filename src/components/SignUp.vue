@@ -31,8 +31,8 @@
         accept="image/*"
       /> -->
     </form>
-    <p v-if="validationErrors" class="text-red text-sm">
-      {{ validationErrors }}
+    <p v-if="validationErrors.confirmPassword" class="text-red text-sm">
+      {{ validationErrors.confirmPassword }}
     </p>
     <button
       class="mt-4 px-4 sm:px-8 py-2 sm:py-3 text-white bg-blue hover:bg-lightBlue rounded-full"
@@ -63,15 +63,19 @@ const validationErrors = ref({
 
 const store = useStore();
 const router = useRouter();
-
 const toValidateForm = (obj) => {
   validationErrors.value = [];
-  const usernamePattern = /^(?=.*[0-9!@#$%^&*()_+{}[\]:;<>,.?~\\/\\-='|"'])\S+/;
-  const passwordPattern =
-    /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}[\]:;<>,.?~\\/\\-='|"']).{8,}$/;
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const usernamePattern = new RegExp(
+    "^(?=.*[0-9!@#$%^&*()_+{}[\\]:;<>,.?~\\/\\-=\\'|\"]).*$"
+  );
+  const passwordPattern = new RegExp(
+    "^(?=.*[A-Z])(?=.*[0-9!@#$%^&*()_+{}[\\]:;<>,.?~\\/\\-=\\'|\"]).{8,}$"
+  );
+  const emailPattern = new RegExp(
+    "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+  );
 
-  if (obj.username !== "" && !usernamePattern.test(obj.username)) {
+  if (obj.name !== "" && !usernamePattern.test(obj.name)) {
     validationErrors.name.value.push(
       "Add a number in the name and remove empty spaces"
     );

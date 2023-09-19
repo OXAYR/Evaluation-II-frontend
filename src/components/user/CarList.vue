@@ -1,33 +1,36 @@
 <template>
   <div class="my-8 sm:my-16 md:my-32 text-silver">
-    <h1 class="font-bold text-2xl sm:text-3xl text-left">Movies</h1>
+    <h1 class="font-bold text-2xl sm:text-3xl text-left">Cars</h1>
     <ul
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
       <li
-        v-for="item in cars"
-        :key="item.id"
-        class="p-4 sm:p-7 bg-blue shadow-md rounded-lg flex flex-col justify-between group">
-        <div class="items-center">
-          <div class="text-lg font-semibold">{{ item.name }}</div>
-          <p class="text-gray-500 text-sm line-clamp-2">
-            {{ formatDate(item.model) }}
-          </p>
-          <div> {{ item.rent }}</div>
-          <div> {{ item.type }}</div>
-          <div> {{ item.make }}</div>
-          <div> {{ item.status }}</div>
-          <div> {{ item.color }}</div>
-          
+        v-for="car in cars"
+        :key="car.id"
+        class="bg-blue shadow-md rounded-lg group">
+        <div class="relative">
+          <img
+            src="../../assets/car.jpg"
+            alt="car image"
+            class="w-full h-40 object-cover rounded-t-lg" />
+          <div
+            class="absolute inset-x-0 bottom-0 bg-opacity-75 bg-blue p-2 text-white text-center">
+            {{ car.name }}
+          </div>
         </div>
-        <div>
-          <img src="../../assets/car.jpg" alt="carimage" class="ml-auto" />
-        </div>
-
-        <div
-          class="mt-4 sm:mt-7 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div class="bg-white p-4 rounded-b-lg">
+          <div class="text-lg font-semibold text-blue">
+            Rent: {{ car.rent }}
+          </div>
+          <div class="text-gray-500 text-sm">
+            Type: {{ car.type }} | Make: {{ car.make }}
+          </div>
+          <div class="text-gray-500 text-sm">
+            Model: {{ car.model }} | Status: {{ car.status }}
+          </div>
+          <div class="text-gray-500 text-sm">Color: {{ car.color }}</div>
           <button
-            @click="reservedCar(item)"
-            class="border bg-yellow text-white hover:bg-silver hover:text-blue font-medium rounded p-2 m-2">
+            @click="reservedCar(car)"
+            class="w-full mt-4 bg-yellow text-white hover:bg-silver hover:text-blue font-medium rounded p-2">
             Book me
           </button>
         </div>
@@ -35,25 +38,18 @@
     </ul>
   </div>
 </template>
+
 <script setup>
-import { ref, defineProps, defineEmits } from "vue";
+import { defineProps } from "vue";
+import { useRouter } from "vue-router";
 
 defineProps({
-  cars: Object,
+  cars: Array,
 });
 
-//const emit = defineEmits(["add-ticket"]);
-const reservedCar = (obj) => {
-  this.$router.push({ path: `/book/${obj.id}` });
+const router = useRouter();
 
-  //emit("reserved", car);
-};
-
-const formatDate = (dateString) => {
-  if (dateString) {
-    const date = new Date(dateString);
-    return date.getFullYear();
-  }
-  return "";
+const reservedCar = (car) => {
+  router.push({ path: `/book/${car.id}` });
 };
 </script>

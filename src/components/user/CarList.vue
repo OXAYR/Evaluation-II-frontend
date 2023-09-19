@@ -75,6 +75,6 @@ const formatDate = (dateString) => {
 };
 const reservedCar = async (car) => {
   await store.dispatch("car/fetchCarById", car.id);
-  router.push({ path: `/book/${car.id}` });
+  router.push({ path: `/home/reserve/${car.id}` });
 };
 </script>

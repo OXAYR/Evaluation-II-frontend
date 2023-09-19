@@ -6,9 +6,7 @@ export default {
     car: {
       cars: [],
     },
-    filterdCar: {
-      cars: [],
-    },
+    filteredCar: {},
   },
   getters: {
     getCars(state) {
@@ -16,7 +14,8 @@ export default {
       return state.car.cars;
     },
     getSelectedCar(state) {
-      return state.filterdCar.cars;
+      console.log("in the selected car getter---->", state.fileteredCar);
+      return state.filteredCar;
     },
   },
   mutations: {
@@ -25,9 +24,10 @@ export default {
       state.car.cars = payload.data.cars;
       console.log("in the car setter--->", state.car.cars);
     },
-    SET_FILTERED_CAR(state, payload) {
-      console.log("in the filteredd car setter--->", payload.data.cars);
-      state.fileterdCar.cars = payload.data.car;
+    SET_FILTERED_CAR(state, { data }) {
+      console.log("in the filteredd car setter--->", data.car);
+      state.filteredCar = data.car;
+      console.log("in the filteredd car setter--->", state.filteredCar);
     },
 
     REMOVE_CAR(state, id) {

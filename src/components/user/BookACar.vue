@@ -10,91 +10,59 @@
           <label for="name" class="block text-sm font-bold text-silver"
             >Name</label
           >
-          <input
-            type="text"
-            id="name"
-            v-model="car.name"
+          <p
             class="mt-1 p-2 block w-full border border-gray-300 rounded-md"
-            placeholder="Enter name" />
+            placeholder="Enter name">
+            {{ selectedCar.name }}
+          </p>
         </div>
         <div class="mb-4 w-full sm:w-1/2 pr-2">
           <label for="model" class="block text-sm font-bold text-silver"
             >Model</label
           >
-          <input
-            type="date"
-            id="model"
-            v-model="car.model"
-            class="mt-1 p-2 block w-full border border-gray-300 rounded-md"
-            placeholder="Enter model" />
+          <p class="mt-1 p-2 block w-full border border-gray-300 rounded-md">
+            {{ formatDate(selectedCar.model) }}
+          </p>
         </div>
         <div class="mb-4 w-full sm:w-1/2 pl-2">
           <label for="rent" class="block text-sm font-bold text-silver"
             >Rent</label
           >
-          <input
-            type="text"
-            id="rent"
-            v-model="car.rent"
-            class="mt-1 p-2 block w-full border border-gray-300 rounded-md"
-            placeholder="Enter rent" />
+          <p class="mt-1 p-2 block w-full border border-gray-300 rounded-md">
+            {{ selectedCar.rent }}
+          </p>
         </div>
         <div class="mb-4 w-full sm:w-1/2 pr-2">
           <label for="type" class="block text-sm font-bold text-silver"
             >Type</label
           >
-          <select
-            id="type"
-            v-model="car.type"
+          <p
             class="mt-1 p-2 block w-full border border-gray-300 bg-white rounded-md">
-            <option value="" disabled>Select type</option>
-            <option value="Sedan">Sedan</option>
-            <option value="Suv">Suv</option>
-            <option value="Crossover Suv">Crossover SUV</option>
-            <option value="Truck">Truck</option>
-            <option value="Hatchback">Hatchback</option>
-            <option value="Sports Car">Sports Car</option>
-            <option value="Family Car">Family Car</option>
-            <option value="Super Car">Super Car</option>
-          </select>
+            {{ selectedCar.type }}
+          </p>
         </div>
         <div class="mb-4 w-full sm:w-1/2 pl-2">
           <label for="make" class="block text-sm font-bold text-silver"
             >Make</label
           >
-          <select
-            id="make"
-            v-model="car.make"
+          <p
             class="mt-1 p-2 block w-full border border-gray-300 bg-white rounded-md">
-            <option value="" disabled>Select Make</option>
-            <option value="Toyota">Toyota</option>
-            <option value="Nissan">Nissan</option>
-            <option value="Honda">Honda</option>
-            <option value="Suzuki">Suzuki</option>
-            <option value="Mercedes">Mercedes</option>
-            <option value="BMW">BMW</option>
-            <option value="Lemo">Lemo</option>
-          </select>
+            {{ selectedCar.make }}
+          </p>
         </div>
         <div class="mb-4 w-full">
-          <label for="color" class="block text-sm font-bold text-silver"
-            >Color</label
-          >
-          <div class="color-picker flex gap-4 mt-3">
+          <div class="text-gray-500 text-sm flex">
+            Color:
             <div
-              v-for="option in colorOptions"
-              :key="option"
-              @click="selectColor(option)"
-              :style="{ backgroundColor: option }"
-              class="color-option w-8 h-8 rounded-full border border-grey cursor-pointer transition-transform transform hover:scale-110"
-              :class="{ 'border-black': car.color === option }"></div>
+              class="ml-2 w-5 h-5 rounded-3xl"
+              :style="{ background: selectedCar.color }" />
           </div>
         </div>
         <p v-if="error.length" class="text-red-600 text-sm">{{ error }}</p>
         <button
           class="mt-4 w-full py-2 bg-lightBlue font-bold rounded-lg text-black font-serif bg-yellow-300 hover:bg-yellow-400"
-          @click="validateCar()">
-          Create
+          @click="makeAReservation()">
+          Make A Reservation
         </button>
       </div>
     </div>
@@ -103,38 +71,22 @@
 
 <script setup>
 import { useStore } from "vuex";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const store = useStore();
+const selectedCar = computed(() => store.getters["car/getSelectedCar"]);
 
-const car = ref({
-  name: "",
-  model: null,
-  rent: null,
-  type: "",
-  make: "",
-  color: "",
-});
+console.log("selected Car---->", selectedCar.value);
 
 let error = ref("");
 
-const colorOptions = [
-  "red",
-  "blue",
-  "black",
-  "grey",
-  "white",
-  "green",
-  "yellow",
-  "skyBlue",
-  "darkRed",
-];
-
-const selectColor = (selectedColor) => {
-  console.log("Selected color------->", selectedColor);
-  car.value.color = selectedColor;
-  console.log("car color------->", car.value.color);
+const formatDate = (dateString) => {
+  if (dateString) {
+    const date = new Date(dateString);
+    return date.getFullYear();
+  }
 };
+
 const validateCar = () => {
   console.log(car);
   if (

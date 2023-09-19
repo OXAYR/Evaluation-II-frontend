@@ -6,6 +6,7 @@ import CarListView from "@/views/userviews/CarListView.vue";
 import UserLayout from "@/layouts/UserLayout.vue";
 import UserAccount from "@/components/user/UserAccount.vue";
 import EditUser from "@/components/user/EditUser.vue";
+import BookACar from "@/components/user/BookACar.vue";
 
 const routes = [
   {
@@ -36,6 +37,10 @@ const routes = [
       {
         path: "account/:id",
         component: EditUser,
+      },
+      {
+        path: "reserve/:carId",
+        component: BookACar,
       },
     ],
   },

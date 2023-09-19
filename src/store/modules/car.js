@@ -6,7 +6,7 @@ export default {
     car: {
       cars: [],
     },
-    filetedCar: {
+    filterdCar: {
       cars: [],
     },
   },
@@ -16,7 +16,7 @@ export default {
       return state.car.cars;
     },
     getSelectedCar(state) {
-      return state.filetedCar.cars;
+      return state.filterdCar.cars;
     },
   },
   mutations: {
@@ -26,7 +26,8 @@ export default {
       console.log("in the car setter--->", state.car.cars);
     },
     SET_FILTERED_CAR(state, payload) {
-      state.filetedCar.cars = payload;
+      console.log("in the filteredd car setter--->", payload.data.cars);
+      state.fileterdCar.cars = payload.data.car;
     },
 
     REMOVE_CAR(state, id) {
@@ -58,22 +59,22 @@ export default {
       }
     },
 
-    async fetchCarsById({ commit }) {
+    async fetchCarById({ commit }, id) {
       try {
         const token = user.state.user.token;
-        console.log("token in the fetch----> ", token);
+        console.log("id in the fetch----> ", id);
         const config = {
           headers: {
             "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
             "Content-Type": "application/json",
           },
         };
-        const { data } = await axios.get("/cars/", config);
+        const { data } = await axios.get(`/cars/${id}`, config);
         console.log(data);
-        commit("SET_CAR_LIST", data);
+        commit("SET_FILTERED_CAR", data);
       } catch (error) {
         console.error("Error fetching cars:", error);
-        alert(error.response.data.message);
+        // alert(error.response.data.message);
       }
     },
 
@@ -85,7 +86,7 @@ export default {
         console.log("token in the fetch----> ", token);
         const config = {
           headers: {
-            "x-access-token":JSON.parse(localStorage.getItem("userAuth")),
+            "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
             "Content-Type": "application/json",
           },
         };

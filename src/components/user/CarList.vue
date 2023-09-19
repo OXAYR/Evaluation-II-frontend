@@ -30,7 +30,8 @@
             >
           </div>
           <div class="text-gray-500 text-sm">
-            Make: {{ car.make }} | Type: {{ car.type }}
+            Make: {{ car.make }} | Type: {{ car.type }} | Model:
+            {{ formatDate(car.model) }}
           </div>
           <div class="text-gray-500 text-sm flex">
             Color:
@@ -47,16 +48,23 @@
       </li>
     </ul>
   </div>
+  <CarDetails
+    v-if="showModal"
+    :car="selectedCar"
+    @closeModal="closeModal"
+    @bookCar="bookCar" />
 </template>
 
 <script setup>
 import { defineProps } from "vue";
+import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
 defineProps({
   cars: Array,
 });
 
+const store = useStore();
 const router = useRouter();
 
 const formatDate = (dateString) => {
@@ -65,7 +73,8 @@ const formatDate = (dateString) => {
     return date.getFullYear();
   }
 };
-const reservedCar = (car) => {
+const reservedCar = async (car) => {
+  await store.dispatch("car/fetchCarById", car.id);
   router.push({ path: `/book/${car.id}` });
 };
 </script>

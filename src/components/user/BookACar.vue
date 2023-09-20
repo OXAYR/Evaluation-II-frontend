@@ -134,10 +134,12 @@ const formatDate = (dateString) => {
 };
 
 const validateReservation = () => {
-  console.log(car);
+  //console.log(car);
   if (reservation.startDate !== "" && reservation.endDate !== "") {
-    console.log("Data to create car:", car.value);
-    store.dispatch("reservation/makeAReservation", car.value);
+    //  console.log("Data to create car:", car.value);
+    const newReservation = { ...selectedCar.value, ...reservation.value };
+    store.dispatch("reservations/makeAReservation", newReservation);
+    store.dispatch("car/updateCarStatus", selectedCar.value._id);
   } else {
     error.value = "Please fill in all fields.";
   }

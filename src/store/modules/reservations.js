@@ -37,7 +37,7 @@ export default {
         console.log("token---->", token, _id);
         console.log("payload---->", payload, payload.released_on);
         //const {id, released_on} = payload
-        const newPayload = { userId, ...payload };
+        const newPayload = { _id, ...payload };
         console.log("In the reservation new payload------> ", newPayload);
         const config = {
           headers: {

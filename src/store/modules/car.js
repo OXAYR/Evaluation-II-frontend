@@ -116,6 +116,25 @@ export default {
         alert(error.response.data.message);
       }
     },
+    async updateCarStatus(_, id) {
+      try {
+        console.log("in the update car----> ", id);
+        const token = user.state.user.token;
+        console.log("token in the update----> ", token);
+        const config = {
+          headers: {
+            "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
+            "Content-Type": "application/json",
+          },
+        };
+
+        console.log("indx----->", id, config);
+        await axios.put(`/cars/status/${id}`, _, config);
+      } catch (error) {
+        console.error("Error updating car:", error);
+        // alert(error.response.data.message);
+      }
+    },
 
     async fetchCars({ commit }) {
       try {

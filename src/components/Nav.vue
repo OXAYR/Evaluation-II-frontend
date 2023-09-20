@@ -5,7 +5,7 @@
         <div class="flex col-span-7">
           <router-link to="/home">
             <p class="font-semibold text-black text-xl text-silver ml-5">
-              CarService
+              RentWheels
             </p>
           </router-link>
         </div>

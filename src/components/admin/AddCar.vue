@@ -139,14 +139,14 @@ const colorOptions = [
 
 const selectColor = (selectedColor) => {
   console.log("Selected color------->", selectedColor);
-  car.color = selectedColor;
+  car.value.color = selectedColor;
   console.log("car color------->", car.color);
 };
 const validateCar = () => {
-  console.log(car);
+  console.log("car in the add to car", car.value);
   if (
     car.name !== "" &&
-    car.model !== "" &&
+    car.model !== null &&
     car.rent !== null &&
     car.type !== "" &&
     car.make !== "" &&

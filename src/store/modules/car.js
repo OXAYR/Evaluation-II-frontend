@@ -43,15 +43,16 @@ export default {
   actions: {
     async addCar(_, payload) {
       try {
-        const token = user.state.user.token;
+        const { _id } = JSON.parse(localStorage.getItem("user"));
         console.log("token---->");
+        const newPayload = { managerId: _id, ...payload };
         const config = {
           headers: {
             "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
             "Content-Type": "application/json",
           },
         };
-        const { data } = await axios.post("/cars", payload, config);
+        const { data } = await axios.post("/cars", newPayload, config);
         console.log("car created:", data);
       } catch (error) {
         console.error("Error creating movie:", error);

@@ -7,6 +7,10 @@ import UserLayout from "@/layouts/UserLayout.vue";
 import UserAccount from "@/components/user/UserAccount.vue";
 import EditUser from "@/components/user/EditUser.vue";
 import BookACar from "@/components/user/BookACar.vue";
+import AdminLayout from "@/layouts/AdminLayout.vue";
+import AddCar from "@/components/admin/AddCar.vue";
+import AdminCarListView from "@/views/adminviews/AdminCarListView.vue";
+import EditCar from "@/components/admin/EditCar.vue";
 
 const routes = [
   {
@@ -41,6 +45,28 @@ const routes = [
       {
         path: "reserve/:carId",
         component: BookACar,
+      },
+    ],
+  },
+
+  {
+    path: "/admin",
+    name: "admin",
+    component: AdminLayout,
+    children: [
+      {
+        path: "",
+        name: "AddCar",
+        component: AddCar,
+      },
+      {
+        path: "admincars",
+        name: "adminCarList",
+        component: AdminCarListView,
+      },
+      {
+        path: "admin/admincars/edit/:id",
+        component: EditCar,
       },
     ],
   },

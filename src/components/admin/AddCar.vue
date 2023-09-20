@@ -93,8 +93,16 @@
         <p v-if="error.length" class="text-red-600 text-sm">{{ error }}</p>
         <button
           class="mt-4 w-full py-2 bg-lightBlue font-bold rounded text-black font-serif bg-yellow-300 hover:bg-yellow-400"
+          @click="validateCar()"
+          v-if="currentRoute == `/admin/adminCars/edit`">
+          Add Car
+        </button>
+
+        <button
+          v-else
+          class="mt-4 w-full py-2 bg-lightBlue font-bold rounded text-black font-serif bg-yellow-300 hover:bg-yellow-400"
           @click="validateCar()">
-          Create
+          Add Car
         </button>
       </div>
     </div>
@@ -104,8 +112,11 @@
 <script setup>
 import { useStore } from "vuex";
 import { ref } from "vue";
-
+import { useRoute } from "vue-router";
+const route = useRoute();
+const currentRoute = ref(route.path);
 const store = useStore();
+const selectedCar = computed(() => store.getters["car/getSelectedCar"]);
 
 const car = ref({
   name: "",

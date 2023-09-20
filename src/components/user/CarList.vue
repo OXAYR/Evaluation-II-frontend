@@ -36,7 +36,7 @@
           <div class="text-gray-500 text-sm flex">
             Color:
             <div
-              class="ml-2 w-5 h-5 rounded-3xl"
+              class="ml-2 w-3 h-3 mt-1 rounded-3xl"
               :style="{ background: car.color }" />
           </div>
           <button
@@ -48,15 +48,10 @@
       </li>
     </ul>
   </div>
-  <CarDetails
-    v-if="showModal"
-    :car="selectedCar"
-    @closeModal="closeModal"
-    @bookCar="bookCar" />
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, defineEmits } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
@@ -67,14 +62,16 @@ defineProps({
 const store = useStore();
 const router = useRouter();
 
+const emit = defineEmits["reserve-car"];
+
 const formatDate = (dateString) => {
   if (dateString) {
     const date = new Date(dateString);
     return date.getFullYear();
   }
 };
-const reservedCar = async (car) => {
-  await store.dispatch("car/fetchCarById", car.id);
+const reservedCar = (car) => {
+  emit("reserve-car", car);
   router.push({ path: `/home/reserve/${car.id}` });
 };
 </script>

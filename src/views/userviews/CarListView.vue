@@ -11,9 +11,9 @@ const store = useStore();
 
 const allCars = computed(() => store.getters["car/getCars"]);
 
-const reserveCar = (car) => {
+const reserveCar = async (car) => {
   console.log("Adding in the cart------------>", car);
-  store.dispatch("cart/createCart", car);
+  await store.dispatch("car/fetchCarById", car.id);
 };
 
 onMounted(() => {

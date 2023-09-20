@@ -1,76 +1,88 @@
 <template>
-  <div class="ml-4 my-10 lg:ml-32">
-    <h1 class="font-bold text-silver text-2xl sm:text-3xl text-left">Movies</h1>
+  <div class="my-8 sm:my-16 md:my-32 text-silver text-left">
+    <h1 class="font-bold text-2xl sm:text-3xl text-left">Cars</h1>
     <ul
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6"
-      v-if="movie">
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
       <li
-        v-for="item in movie"
-        :key="item.id"
-        class="p-4 bg-blue shadow-md rounded-lg flex flex-col justify-between">
-        <div>
+        v-for="car in cars"
+        :key="car.id"
+        class="bg-blue shadow-md rounded-lg group">
+        <div class="relative">
           <img
-            src="../../assets/Netflix.svg"
-            alt="movieimage"
-            class="mx-auto" />
+            src="../../assets/car.jpg"
+            alt="car image"
+            class="w-full h-40 object-cover rounded-t-lg" />
         </div>
-        <div class="mt-4 flex flex-col justify-between items-center">
-          <div class="text-lg text-silver font-semibold">{{ item.name }}</div>
-          <p class="text-silver">{{ formatDate(item.released_on) }}</p>
-          <div class="mt-2 flex justify-center sm:justify-between">
+        <div class="bg-white p-4 rounded-b-lg">
+          <div class="flex justify-between">
+            <div class="text-lg font-semibold text-blue">{{ car.name }}</div>
+            <div class="text-lg font-semibold">Rs. {{ car.rent }} /-</div>
+          </div>
+          <div class="text-gray-500 text-sm">
+            Status:
+            <span
+              :class="
+                car.status === 'available' ? 'text-blue-500' : 'text-red-500'
+              "
+              >{{ car.status }}</span
+            >
+          </div>
+          <div class="text-gray-500 text-sm">
+            Make: {{ car.make }} | Type: {{ car.type }} | Model:
+            {{ formatDate(car.model) }}
+          </div>
+          <div class="text-gray-500 text-sm flex">
+            Color:
+            <div
+              class="ml-2 w-3 h-3 mt-1 rounded-3xl"
+              :style="{ background: car.color }" />
+          </div>
+          <div class="flex mt-4">
             <button
-              @click="deleteMovie(item.id)"
-              class="border border-red text-red hover:bg-red hover:text-white font-medium rounded p-1 m-1 sm:m-3">
+              @click="deleteCar(car.id)"
+              class="flex-1 bg-red-500 text-black hover:bg-red-600 font-medium rounded-lg p-2 mr-2">
               Delete
             </button>
             <button
-              @click="editMovie(item.id)"
-              class="border border-white text-white hover:bg-white hover:text-blue font-medium rounded p-1 m-1 sm:m-3">
+              @click="editCar(car.id)"
+              class="flex-1 bg-yellow-400 text-black hover:bg-yellow-500 font-medium rounded-lg p-2">
               Edit
             </button>
           </div>
         </div>
       </li>
     </ul>
-    <div v-else class="flex flex-col items-center justify-center text-center">
-      <div>
-        <img
-          src="../../assets/undraw_no_data_re_kwbl.svg"
-          alt="no products"
-          class="max-w-full h-auto max-h-48 mx-auto drop-shadow-lg" />
-      </div>
-      <p class="font-semibold mt-2">No Movies Available</p>
-    </div>
   </div>
 </template>
+
 <script setup>
-import { useRouter } from "vue-router";
 import { defineProps, defineEmits } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+
 defineProps({
-  movie: Object,
+  cars: Array,
 });
 
+const store = useStore();
 const router = useRouter();
 
-const editMovie = (index) => {
-  console.log(" in the parent edit movie ", index);
-  router.push({ path: `/edit/${index}` });
-};
-
-const emit = defineEmits(["delete-movie"]);
-
-const deleteMovie = (index) => {
-  var answer = confirm("Do you really want to delete the movie?");
-  if (answer) {
-    console.log("in the delete component", index);
-    emit("delete-movie", index);
-  }
-};
 const formatDate = (dateString) => {
   if (dateString) {
     const date = new Date(dateString);
     return date.getFullYear();
   }
-  return "";
+};
+
+const editCar = async (carId) => {
+  router.push({ path: `admin/admincars/edit/${carId}` });
+  await store.dispatch("car/fetchCarById", carId);
+};
+const emit = defineEmits(["delete-car"]);
+const deleteCar = (carId) => {
+  var answer = confirm("Do you really want to delete the car?");
+  if (answer) {
+    emit("delete-car", carId);
+  }
 };
 </script>

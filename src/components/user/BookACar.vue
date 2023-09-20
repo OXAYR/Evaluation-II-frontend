@@ -93,7 +93,11 @@
           <p v-if="error.length" class="text-red-600 text-sm">{{ error }}</p>
         </div>
         <div class="w-full sm:w-1/2 pl-2 flex justify-center items-center">
-          <img src="../../assets/carView.jpg" alt="car-view" />
+          <img
+            src="../../assets/carView.jpg"
+            alt="car-view"
+            title="car-view"
+            class="cursor-pointer" />
         </div>
         <div class="w-full">
           <button

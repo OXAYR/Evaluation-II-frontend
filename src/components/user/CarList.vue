@@ -24,7 +24,7 @@
             Status:
             <span
               :class="
-                car.status === 'available' ? 'text-blue-500' : 'text-red-500'
+                car.status === 'Available' ? 'text-blue-500' : 'text-red-500'
               "
               >{{ car.status }}</span
             >

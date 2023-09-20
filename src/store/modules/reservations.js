@@ -9,7 +9,10 @@ export default {
   },
   getters: {
     getReservation(state) {
-      console.log("IN the getter of reservation-----> ", state);
+      console.log(
+        "IN the getter of reservation-----> ",
+        state.reservation.bookings
+      );
       return state.reservation.bookings;
     },
     getReservationLength(state) {
@@ -34,10 +37,7 @@ export default {
           "root state user in the reservation------>",
           user.state.user.token
         );
-        console.log("token---->", token, _id);
-        console.log("payload---->", payload, payload.released_on);
-        //const {id, released_on} = payload
-        const newPayload = { _id, ...payload };
+        const newPayload = { userId: _id, ...payload };
         console.log("In the reservation new payload------> ", newPayload);
         const config = {
           headers: {
@@ -45,7 +45,7 @@ export default {
             "Content-Type": "application/json",
           },
         };
-        const { data } = await axios.post("/reservation", newPayload, config);
+        const { data } = await axios.post("/reservations", newPayload, config);
         console.log("reservation created:", data);
         alert(data.message);
       } catch (error) {
@@ -72,7 +72,7 @@ export default {
         );
 
         const { data } = await axios.put(
-          `/reservation/updatetickets/${movieId}`,
+          `/reservations/updatetickets/${movieId}`,
           newPayload,
           config
         );
@@ -89,20 +89,21 @@ export default {
     async getTheReservation({ commit }) {
       try {
         const { _id } = JSON.parse(localStorage.getItem("user"));
+
         const config = {
           headers: {
             "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
             "Content-Type": "application/json",
           },
         };
-        const { data } = await axios.get(`/reservation/${_id}`, config);
+        const { data } = await axios.get(`/reservations/${_id}`, config);
         console.log(
-          "in the get reservation----> ",
-          data.data.reservation.items
+          "in the get reservation action----> ",
+          data.data.reservations.bookings
         );
-        commit("SET_reservation", data.data.reservation.items);
+        commit("SET_RESERVATION", data.data.reservations.bookings);
       } catch (error) {
-        //console.error("Error fetching reservation:", error);
+        console.error("Error fetching reservation:", error);
         //alert(error.response.data.message);
       }
     },
@@ -118,7 +119,7 @@ export default {
           },
         };
         // console.log('config ',config)
-        const { data } = await axios.delete(`/reservation/${id}`, config, _id);
+        const { data } = await axios.delete(`/reservations/${id}`, config, _id);
         console.log(
           "RESPONSE RECIEVED From remove reservation",
           data.data.reservation.items

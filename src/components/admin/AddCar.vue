@@ -4,7 +4,7 @@
       <div
         class="max-w-md flex flex-wrap justify-between w-full bg-white rounded-lg shadow-md p-4 sm:p-6">
         <h1 class="font-bold text-2xl sm:text-3xl my-5 text-silver">
-          Add a Car
+          {{ isUpdate ? "Update Car" : "Add a Car" }}
         </h1>
         <div class="mb-4 w-full">
           <label for="name" class="block text-sm font-bold text-silver"
@@ -93,16 +93,8 @@
         <p v-if="error.length" class="text-red-600 text-sm">{{ error }}</p>
         <button
           class="mt-4 w-full py-2 bg-lightBlue font-bold rounded text-black font-serif bg-yellow-300 hover:bg-yellow-400"
-          @click="validateCar()"
-          v-if="currentRoute == `/admin/adminCars/edit`">
-          Add Car
-        </button>
-
-        <button
-          v-else
-          class="mt-4 w-full py-2 bg-lightBlue font-bold rounded text-black font-serif bg-yellow-300 hover:bg-yellow-400"
           @click="validateCar()">
-          Add Car
+          {{ isUpdate ? "Update" : "Add" }} Car
         </button>
       </div>
     </div>
@@ -111,20 +103,24 @@
 
 <script setup>
 import { useStore } from "vuex";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
 const route = useRoute();
 const currentRoute = ref(route.path);
 const store = useStore();
 const selectedCar = computed(() => store.getters["car/getSelectedCar"]);
 
+const isUpdate = computed(() => {
+  return currentRoute.value.includes("/edit/");
+});
+
 const car = ref({
-  name: "",
-  model: new Date(),
-  rent: null,
-  type: "",
-  make: "",
-  color: "",
+  name: isUpdate.value ? selectedCar.value?.name : "",
+  model: isUpdate.value ? selectedCar.value?.model : new Date(),
+  rent: isUpdate.value ? selectedCar.value?.rent : null,
+  type: isUpdate.value ? selectedCar.value?.type : "",
+  make: isUpdate.value ? selectedCar.value?.make : "",
+  color: isUpdate.value ? selectedCar.value?.color : "",
 });
 
 let error = ref("");
@@ -156,8 +152,12 @@ const validateCar = () => {
     car.make !== "" &&
     car.color !== ""
   ) {
-    console.log("Data to create car:", car.value);
-    store.dispatch("car/addCar", car.value);
+    isUpdate.value
+      ? store.dispatch("car/updateCar", {
+          indx: selectedCar._id,
+          updateCar: car.value,
+        })
+      : store.dispatch("car/addCar", car.value);
   } else {
     error.value = "Please fill in all fields.";
   }

@@ -10,7 +10,6 @@ import BookACar from "@/components/user/BookACar.vue";
 import AdminLayout from "@/layouts/AdminLayout.vue";
 import AddCar from "@/components/admin/AddCar.vue";
 import AdminCarListView from "@/views/adminviews/AdminCarListView.vue";
-import EditCar from "@/components/admin/EditCar.vue";
 
 const routes = [
   {
@@ -65,8 +64,8 @@ const routes = [
         component: AdminCarListView,
       },
       {
-        path: "admin/admincars/edit/:id",
-        component: EditCar,
+        path: "admincars/edit/:id",
+        component: AddCar,
       },
     ],
   },

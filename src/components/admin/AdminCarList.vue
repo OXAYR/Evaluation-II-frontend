@@ -75,8 +75,8 @@ const formatDate = (dateString) => {
 };
 
 const editCar = async (carId) => {
-  router.push({ path: `admin/admincars/edit/${carId}` });
   await store.dispatch("car/fetchCarById", carId);
+  router.push({ path: `admincars/edit/${carId}` });
 };
 const emit = defineEmits(["delete-car"]);
 const deleteCar = (carId) => {

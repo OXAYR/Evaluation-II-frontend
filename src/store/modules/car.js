@@ -14,7 +14,7 @@ export default {
       return state.car.cars;
     },
     getSelectedCar(state) {
-      console.log("in the selected car getter---->", state.fileteredCar);
+      console.log("in the selected car getter---->", state.filteredCar);
       return state.filteredCar;
     },
   },

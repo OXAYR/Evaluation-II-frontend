@@ -62,7 +62,7 @@ defineProps({
 const store = useStore();
 const router = useRouter();
 
-const emit = defineEmits["reserve-car"];
+const emit = defineEmits(["reserve-car"]);
 
 const formatDate = (dateString) => {
   if (dateString) {

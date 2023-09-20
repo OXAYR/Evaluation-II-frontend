@@ -154,7 +154,7 @@ const validateCar = () => {
   ) {
     isUpdate.value
       ? store.dispatch("car/updateCar", {
-          indx: selectedCar._id,
+          indx: selectedCar.value._id,
           updateCar: car.value,
         })
       : store.dispatch("car/addCar", car.value);

@@ -100,7 +100,7 @@ export default {
 
     async updateCar(_, { indx, updateCar }) {
       try {
-        console.log("in the update movie----> ", indx);
+        console.log("in the update car----> ", indx);
         const token = user.state.user.token;
         console.log("token in the update----> ", token);
         const config = {

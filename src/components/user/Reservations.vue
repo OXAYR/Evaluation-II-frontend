@@ -40,8 +40,11 @@ const reservations = computed(
 console.log("in the component reservations---->:", reservations.value);
 
 const deleteReservation = (reservationId) => {
-  console.log("reservation id----->", reservationId);
-  store.dispatch("reservations/deleteReservation", reservationId);
+  const answer = confirm("Do you really want to delete the reservation?");
+  if (answer) {
+    console.log("reservation id----->", reservationId);
+    store.dispatch("reservations/deleteReservation", reservationId);
+  }
 };
 
 const formatDate = (dateString) => {

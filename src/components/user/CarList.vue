@@ -8,6 +8,7 @@
         <option value="name">Filter by Name</option>
         <option value="type">Filter by Type</option>
         <option value="make">Filter by Make</option>
+        <option value="make">Filter by Status</option>
       </select>
       <input
         v-model="searchQuery"
@@ -56,7 +57,12 @@
           </div>
           <button
             @click="reservedCar(car)"
-            class="w-full mt-4 bg-yellow-300 text-black hover:bg-yellow-400 font-medium rounded-lg p-2">
+            :class="
+              car.status === 'hired'
+                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                : 'w-full bg-yellow-300 text-black hover:bg-yellow-400 font-medium rounded-lg p-2'
+            "
+            :disabled="car.status === 'Hired'">
             Book me
           </button>
         </div>
@@ -67,7 +73,7 @@
 
 <script setup>
 import { defineProps, defineEmits, ref, computed } from "vue";
-import { useStore } from "vuex";
+
 import { useRouter } from "vue-router";
 
 const props = defineProps({
@@ -95,6 +101,8 @@ const filteredCars = computed(() => {
       return car.type.toLowerCase().includes(query);
     } else if (filter === "make") {
       return car.make.toLowerCase().includes(query);
+    } else if (filter === "status") {
+      return car.status.toLowerCase().includes(query);
     }
   });
 });

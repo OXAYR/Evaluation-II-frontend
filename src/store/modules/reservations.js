@@ -54,10 +54,8 @@ export default {
       }
     },
 
-    async updateTicket({ commit }, payload) {
+    async updateReservation({ commit }, { carId, reservation, rent }) {
       try {
-        console.log("payload in the update Tickets---->", payload);
-        const { movieId, ticketCount } = payload;
         const { _id } = JSON.parse(localStorage.getItem("user"));
         const config = {
           headers: {
@@ -65,22 +63,26 @@ export default {
             "Content-Type": "application/json",
           },
         };
-        const newPayload = { userId: _id, tickets: ticketCount };
+        const newPayload = {
+          userId: _id,
+          reservation: reservation,
+          rent: rent,
+        };
         console.log(
           "In the update ticket reservation new payload------> ",
           newPayload
         );
 
         const { data } = await axios.put(
-          `/reservations/updatetickets/${movieId}`,
+          `/reservations/updatetickets/${carId}`,
           newPayload,
           config
         );
         console.log(
           "in the get reservation----> ",
-          data.data.reservation.items
+          data.data.reservation.bookings
         );
-        commit("SET_reservation", data.data.reservation.items);
+        commit("SET_RESERVATION", data.data.reservation.bookings);
       } catch (error) {
         //console.log(error)
       }
@@ -97,10 +99,7 @@ export default {
           },
         };
         const { data } = await axios.get(`/reservations/${_id}`, config);
-        console.log(
-          "in the get reservation action----> ",
-          data.data.reservations.bookings
-        );
+        console.log("in the get reservation action----> ", data);
         commit("SET_RESERVATION", data.data.reservations.bookings);
       } catch (error) {
         console.error("Error fetching reservation:", error);

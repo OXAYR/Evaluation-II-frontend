@@ -14,13 +14,8 @@
           <p class="text-base">
             End Date: {{ formatDate(reservation.endDate) }}
           </p>
-          <p class="text-base">Rent: {{ reservation.rent }}</p>
+          <p class="text-base">Rent: {{ reservation.totalRent }}</p>
           <div class="mt-2">
-            <button
-              @click="editReservation(reservation._id)"
-              class="bg-blue-500 text-white px-4 py-2 rounded-lg mr-2 hover:bg-blue-600">
-              Edit
-            </button>
             <button
               @click="deleteReservation(reservation.carId)"
               class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
@@ -35,7 +30,6 @@
 
 <script setup>
 import { computed, onMounted } from "vue";
-import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -44,11 +38,6 @@ const reservations = computed(
   () => store.getters["reservations/getReservation"]
 );
 console.log("in the component reservations---->:", reservations.value);
-
-const editReservation = (reservationId) => {
-  const router = useRouter();
-  router.push(`/edit-reservation/${reservationId}`);
-};
 
 const deleteReservation = (reservationId) => {
   console.log("reservation id----->", reservationId);

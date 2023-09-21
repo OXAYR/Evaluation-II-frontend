@@ -114,7 +114,6 @@
 <script setup>
 import { useStore } from "vuex";
 import { ref, computed } from "vue";
-
 const store = useStore();
 const selectedCar = computed(() => store.getters["car/getSelectedCar"]);
 const reservation = ref({

@@ -50,6 +50,10 @@ const routes = [
         path: "reservations",
         component: Reservations,
       },
+      {
+        path: "editreservation/:reservationId",
+        component: BookACar,
+      },
     ],
   },
 

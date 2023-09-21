@@ -6,6 +6,9 @@ export default {
     reservation: {
       bookings: [],
     },
+    allReservations: {
+      bookings: [],
+    },
   },
   getters: {
     getReservation(state) {
@@ -15,6 +18,13 @@ export default {
       );
       return state.reservation.bookings;
     },
+    getAllReservations(state) {
+      console.log(
+        "IN the getter of reservation-----> ",
+        state.allReservations.bookings
+      );
+      return state.allReservations.bookings;
+    },
     getReservationLength(state) {
       return state.reservation.bookings.length;
     },
@@ -23,6 +33,10 @@ export default {
     SET_RESERVATION(state, reservation) {
       console.log("reservation in the setter ", reservation);
       state.reservation.bookings = reservation;
+    },
+    SET_ALL_RESERVATION(state, reservation) {
+      console.log("reservation in the setter ", reservation);
+      state.allReservations.bookings = reservation;
     },
     DELETE_RESERVATION_EL(state, reservation) {
       state.reservation = reservation;
@@ -88,17 +102,15 @@ export default {
       }
     },
 
-    async getTheReservation({ commit }) {
+    async getTheReservation({ commit }, id) {
       try {
-        const { _id } = JSON.parse(localStorage.getItem("user"));
-
         const config = {
           headers: {
             "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
             "Content-Type": "application/json",
           },
         };
-        const { data } = await axios.get(`/reservations/${_id}`, config);
+        const { data } = await axios.get(`/reservations/${id}`, config);
         console.log("in the get reservation action----> ", data);
         commit("SET_RESERVATION", data.data.reservations.bookings);
       } catch (error) {
@@ -120,7 +132,7 @@ export default {
           "in the get reservation action----> ",
           data.data.reservations
         );
-        commit("SET_RESERVATION", data.data.reservations);
+        commit("SET_ALL_RESERVATION", data.data.reservations);
       } catch (error) {
         //console.error("Error fetching reservation:", error);
         alert("No reservation found");

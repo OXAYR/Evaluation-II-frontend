@@ -14,7 +14,7 @@
           <p class="text-base">
             End Date: {{ formatDate(reservation.endDate) }}
           </p>
-          <p class="text-base">Rent: {{ reservation.totalRent }}</p>
+          <p class="text-base">Rent: {{ reservation.rent }}</p>
           <div class="mt-2">
             <button
               @click="deleteReservation(reservation.carId)"
@@ -50,8 +50,8 @@ const formatDate = (dateString) => {
     return date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear();
   }
 };
-
+const { _id } = JSON.parse(localStorage.getItem("user"));
 onMounted(async () => {
-  await store.dispatch("reservations/getTheReservation");
+  await store.dispatch("reservations/getTheReservation", _id);
 });
 </script>

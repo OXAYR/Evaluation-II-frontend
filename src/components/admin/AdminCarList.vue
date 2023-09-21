@@ -74,7 +74,7 @@ const formatDate = (dateString) => {
   }
 };
 const { _id } = JSON.parse(localStorage.getItem("user"));
-props.cars.filter((managerId) => managerId === _id);
+props.cars.filter((car) => car.managerId === _id);
 
 const editCar = async (carId) => {
   await store.dispatch("car/fetchCarById", carId);

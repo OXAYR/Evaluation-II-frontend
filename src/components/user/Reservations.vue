@@ -8,7 +8,7 @@
         class="mb-4 p-4 border rounded-lg">
         <div>
           <p class="text-lg font-semibold">
-            Reservation ID: {{ reservation.id }}
+            Reservation ID: {{ reservation._id }}
           </p>
           <p class="text-base">Car Name: {{ reservation.name }}</p>
           <p class="text-base">
@@ -20,12 +20,12 @@
           <p class="text-base">Rent: {{ reservation.rent }}</p>
           <div class="mt-2">
             <button
-              @click="editReservation(reservation.id)"
+              @click="editReservation(reservation._id)"
               class="bg-blue-500 text-white px-4 py-2 rounded-lg mr-2 hover:bg-blue-600">
               Edit
             </button>
             <button
-              @click="deleteReservation(reservation.id)"
+              @click="deleteReservation(reservation.carId)"
               class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
               Delete
             </button>
@@ -54,6 +54,7 @@ const editReservation = (reservationId) => {
 };
 
 const deleteReservation = (reservationId) => {
+  console.log("reservation id----->", reservationId);
   store.dispatch("reservations/deleteReservation", reservationId);
 };
 

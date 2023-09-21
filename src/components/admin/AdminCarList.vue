@@ -60,7 +60,7 @@ import { defineProps, defineEmits } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
-defineProps({
+const props = defineProps({
   cars: Array,
 });
 
@@ -73,6 +73,8 @@ const formatDate = (dateString) => {
     return date.getFullYear();
   }
 };
+const { _id } = JSON.parse(localStorage.getItem("user"));
+props.cars.filter((managerId) => managerId === _id);
 
 const editCar = async (carId) => {
   await store.dispatch("car/fetchCarById", carId);

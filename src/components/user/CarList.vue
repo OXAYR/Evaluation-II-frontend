@@ -1,10 +1,25 @@
 <template>
   <div class="my-8 sm:my-16 md:my-32 text-silver text-left">
     <h1 class="font-bold text-2xl sm:text-3xl text-left">Cars</h1>
+    <div class="flex justify-between items-center mt-4">
+      <select v-model="selectedFilter" class="p-2 border rounded-lg">
+        <option value="all">All</option>
+        <option value="color">Filter by Color</option>
+        <option value="name">Filter by Name</option>
+        <option value="type">Filter by Type</option>
+        <option value="make">Filter by Make</option>
+      </select>
+      <input
+        v-model="searchQuery"
+        type="text"
+        placeholder="Search..."
+        class="p-2 border rounded-lg w-1/3" />
+    </div>
+
     <ul
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
       <li
-        v-for="car in cars"
+        v-for="car in filteredCars"
         :key="car.id"
         class="bg-blue shadow-md rounded-lg group">
         <div class="relative">
@@ -51,18 +66,38 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits, ref, computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
-defineProps({
+const props = defineProps({
   cars: Array,
 });
 
-const store = useStore();
 const router = useRouter();
-
 const emit = defineEmits(["reserve-car"]);
+
+const selectedFilter = ref("all");
+const searchQuery = ref("");
+
+const filteredCars = computed(() => {
+  const filter = selectedFilter.value.toLowerCase();
+  const query = searchQuery.value.toLowerCase();
+
+  return props.cars.filter((car) => {
+    if (filter === "all") {
+      return car.name.toLowerCase().includes(query);
+    } else if (filter === "color") {
+      return car.color.toLowerCase().includes(query);
+    } else if (filter === "name") {
+      return car.name.toLowerCase().includes(query);
+    } else if (filter === "type") {
+      return car.type.toLowerCase().includes(query);
+    } else if (filter === "make") {
+      return car.make.toLowerCase().includes(query);
+    }
+  });
+});
 
 const formatDate = (dateString) => {
   if (dateString) {
@@ -70,6 +105,7 @@ const formatDate = (dateString) => {
     return date.getFullYear();
   }
 };
+
 const reservedCar = (car) => {
   emit("reserve-car", car);
   router.push({ path: `/home/reserve/${car.id}` });

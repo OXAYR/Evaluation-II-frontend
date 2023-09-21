@@ -7,9 +7,6 @@
         :key="reservation.id"
         class="mb-4 p-4 border rounded-lg">
         <div>
-          <p class="text-lg font-semibold">
-            Reservation ID: {{ reservation._id }}
-          </p>
           <p class="text-base">Car Name: {{ reservation.name }}</p>
           <p class="text-base">
             Start Date: {{ formatDate(reservation.startDate) }}

@@ -98,6 +98,14 @@ export default {
       }
     },
 
+    async deleteManager({ commit }, id) {
+      try {
+        await axios.delete(`/users/${id}`);
+      } catch (error) {
+        console.error("error deleting manager", error);
+      }
+    },
+
     async fetchUsers({ commit }) {
       try {
         console.log("In the fetch users");

@@ -58,8 +58,8 @@
           <button
             @click="reservedCar(car)"
             :class="
-              car.status === 'hired'
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              car.status === 'Hired'
+                ? 'bg-gray-300 w-full text-gray-500 cursor-not-allowed font-medium rounded-lg p-2'
                 : 'w-full bg-yellow-300 text-black hover:bg-yellow-400 font-medium rounded-lg p-2'
             "
             :disabled="car.status === 'Hired'">

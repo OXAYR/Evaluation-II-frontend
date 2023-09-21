@@ -100,7 +100,8 @@ export default {
 
     async deleteManager({ commit }, id) {
       try {
-        await axios.delete(`/users/${id}`);
+        console.log("Id in the delete manager id----------->", id);
+        await axios.delete(`/users/deletemanager/${id}`);
       } catch (error) {
         console.error("error deleting manager", error);
       }

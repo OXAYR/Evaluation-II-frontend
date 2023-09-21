@@ -102,8 +102,28 @@ export default {
         console.log("in the get reservation action----> ", data);
         commit("SET_RESERVATION", data.data.reservations.bookings);
       } catch (error) {
-        console.error("Error fetching reservation:", error);
-        //alert(error.response.data.message);
+        //console.error("Error fetching reservation:", error);
+        alert("No reservation found");
+      }
+    },
+
+    async getAllReservation({ commit }) {
+      try {
+        const config = {
+          headers: {
+            "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
+            "Content-Type": "application/json",
+          },
+        };
+        const { data } = await axios.get(`/reservations`, config);
+        console.log(
+          "in the get reservation action----> ",
+          data.data.reservations
+        );
+        commit("SET_RESERVATION", data.data.reservations);
+      } catch (error) {
+        //console.error("Error fetching reservation:", error);
+        alert("No reservation found");
       }
     },
 

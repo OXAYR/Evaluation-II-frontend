@@ -11,6 +11,8 @@ import AdminLayout from "@/layouts/AdminLayout.vue";
 import AddCar from "@/components/admin/AddCar.vue";
 import AdminCarListView from "@/views/adminviews/AdminCarListView.vue";
 import Reservations from "@/components/user/Reservations.vue";
+import Users from "@/components/admin/Users.vue";
+import AllReservations from "@/components/admin/AllReservations.vue";
 
 const routes = [
   {
@@ -64,7 +66,7 @@ const routes = [
     children: [
       {
         path: "",
-        name: "AddCar",
+        name: "addcar",
         component: AddCar,
       },
       {
@@ -75,6 +77,14 @@ const routes = [
       {
         path: "admincars/edit/:id",
         component: AddCar,
+      },
+      {
+        path: "users",
+        component: Users,
+      },
+      {
+        path: "reservations",
+        component: AllReservations,
       },
     ],
   },

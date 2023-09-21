@@ -36,6 +36,9 @@
                 </div>
               </div>
             </td>
+            <td>
+              <button @click="deleteUser(user)">x</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -69,19 +72,21 @@ const fetchUsers = async () => {
 
 const users = computed(() => store.getters["user/getAllUsers"]);
 
-const deleteManager = async (user) => {
+const deleteUser = async (user) => {
   try {
     var answer = confirm("Do you really want to delete the user?");
     if (answer) {
       isLoading.value = true;
-      if (user.userRole.toLowerCase() === "manager")
-        await store.dispatch("user/deleteManager", {
-          id: user._id,
-        });
-      else {
-        await store.dispatch("user/deleteUserAccount", {
-          id: user._id,
-        });
+      if (user.userRole.toLowerCase() === "manager") {
+        console.log("i am admin");
+        // await store.dispatch("user/deleteManager", {
+        //   id: user._id,
+        // });
+      } else {
+        console.log("i am user");
+        // await store.dispatch("user/deleteUserAccount", {
+        //   id: user._id,
+        // });
       }
       isLoading.value = false;
     }

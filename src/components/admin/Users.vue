@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-silver"
+    class="text-black"
     :class="{ 'lg:mr-96': currentPath === '/admin/users' }">
     <h1
       v-if="currentPath === '/admin/users'"
@@ -9,35 +9,30 @@
     </h1>
     <div class="w-full sm:w-auto overflow-x-auto">
       <div v-if="isLoading" class="text-center mt-4">
-        <div class="spinner-border text-primary" role="status">
+        <div class="text-primary" role="status">
           <span class="sr-only">Loading...</span>
         </div>
       </div>
-      <table class="w-full">
-        <thead>
-          <tr class="font-bold divide-x divide-lightestBlue">
-            <th class="w-1/3 sm:w-auto">Name</th>
-            <th class="w-1/3 sm:w-auto">Email</th>
-            <th class="w-1/3 sm:w-auto">User Role</th>
+      <table class="w-full justify-center divide-y divide-gray-500 card">
+        <thead class="bg-gray-50 text-blue-950">
+          <tr class="font-bold">
+            <th class="w-1/3 sm:w-auto px-4 py-2">Name</th>
+            <th class="w-1/3 sm:w-auto px-4 py-2">Email</th>
+            <th class="w-1/3 sm:w-auto px-4 py-2">User Role</th>
+            <th class="w-1/3 sm:w-auto px-4 py-2">Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="divide-y divide-gray-100">
           <tr v-for="user in users" :key="user._id" class="my-2">
-            <td class="w-1/3 sm:w-auto px-4 sm:px-3 sm:mx-3">
-              {{ user.name }}
-            </td>
-            <td class="w-1/3 sm:w-auto px-4 sm:px-3 sm:mx-3">
-              {{ user.email }}
-            </td>
-            <td class="w-1/3 sm:w-auto px-4 sm:px-3 py-2 sm:mx-3">
-              <div class="flex items-center justify-center">
-                <div class="text-center">
-                  {{ user.userRole }}
-                </div>
-              </div>
-            </td>
-            <td>
-              <button @click="deleteUser(user)">x</button>
+            <td class="w-1/3 sm:w-auto px-4 py-2">{{ user.name }}</td>
+            <td class="w-1/3 sm:w-auto px-4 py-2">{{ user.email }}</td>
+            <td class="w-1/3 sm:w-auto px-4 py-2">{{ user.userRole }}</td>
+            <td class="w-1/3 sm:w-auto px-4 py-2">
+              <button
+                @click="deleteUser(user)"
+                class="bg-black text-white px-2 text-sm rounded-3xl hover:bg-gray-800">
+                x
+              </button>
             </td>
           </tr>
         </tbody>
@@ -53,8 +48,6 @@ import { useRoute } from "vue-router";
 
 const store = useStore();
 const route = useRoute();
-const userBeingEdited = ref(null);
-const editedUserRole = ref(null);
 const isLoading = ref(false);
 const currentPath = ref(route.path);
 
@@ -78,15 +71,15 @@ const deleteUser = async (user) => {
     if (answer) {
       isLoading.value = true;
       if (user.userRole.toLowerCase() === "manager") {
-        console.log("i am admin");
-        // await store.dispatch("user/deleteManager", {
-        //   id: user._id,
-        // });
+        console.log("i am manager");
+        await store.dispatch("user/deleteManager", {
+          id: user._id,
+        });
       } else {
         console.log("i am user");
-        // await store.dispatch("user/deleteUserAccount", {
-        //   id: user._id,
-        // });
+        await store.dispatch("user/deleteUserAccount", {
+          id: user._id,
+        });
       }
       isLoading.value = false;
     }

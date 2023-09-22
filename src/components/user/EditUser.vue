@@ -5,23 +5,25 @@
 
       <div class="mb-4">
         <label class="block font-semibold mb-2">Name:</label>
-        <input class="bg-grey p-2 rounded w-full text-center" v-model="name" />
+        <input
+          class="bg-gray-200 p-2 rounded w-full text-center"
+          v-model="name" />
       </div>
 
       <div class="mb-4">
         <label class="block font-semibold mb-2">Email:</label>
-        <p class="bg-grey p-2 rounded">{{ email }}</p>
+        <p class="bg-gray-200 p-2 rounded">{{ email }}</p>
       </div>
       <div class="mb-4">
         <label class="block font-semibold mb-2">New Password</label>
         <input
-          class="bg-grey p-2 rounded text-center w-full"
+          class="bg-gray-200 p-2 rounded text-center w-full"
           v-model="newPassword" />
       </div>
 
       <button
         @click="updateUser(indx)"
-        class="bg-blue text-white px-4 py-2 rounded hover:bg-blue-600 mr-2">
+        class="bg-blue text-black px-4 py-2 rounded bg-yellow-400 mr-2">
         Update
       </button>
     </div>
@@ -37,16 +39,18 @@ const store = useStore();
 const router = useRouter();
 const route = useRoute();
 
+const { name, email } = JSON.parse(localStorage.getItem("user"));
+
 const newPassword = ref("");
-const name = ref("");
-const email = ref("");
+const newName = ref(name);
+const newEmail = ref(email);
 const userId = computed(() => route.params.userId);
 
 const updateUser = async () => {
   console.log("In the update password --->", userId.value);
   await store.dispatch("user/updateUser", {
     id: userId.value,
-    name: name.value,
+    name: newName.value,
     password: newPassword.value,
   });
   router.push("/");

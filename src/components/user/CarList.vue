@@ -1,20 +1,24 @@
 <template>
   <div class="my-8 sm:my-16 md:my-32 text-silver text-left">
     <h1 class="font-bold text-2xl sm:text-3xl text-left">Cars</h1>
-    <div class="flex justify-between items-center mt-4">
-      <select v-model="selectedFilter" class="p-2 border rounded-lg">
-        <option value="all">All</option>
-        <option value="color">Filter by Color</option>
-        <option value="name">Filter by Name</option>
-        <option value="type">Filter by Type</option>
-        <option value="make">Filter by Make</option>
-        <option value="make">Filter by Status</option>
-      </select>
-      <input
-        v-model="searchQuery"
-        type="text"
-        placeholder="Search..."
-        class="p-2 border rounded-lg w-1/3" />
+    <div class="flex justify-end p-5 text-white rounded-lg items-center mt-4">
+      <div class="bg-white border-gray-700 rounded-lg w-1/2">
+        <select
+          v-model="selectedFilter"
+          class="p-3 border bg-white focus:outline-none border-gray-300 rounded text-black">
+          <option value="all">All</option>
+          <option value="color">Filter by Color</option>
+          <option value="name">Filter by Name</option>
+          <option value="type">Filter by Type</option>
+          <option value="make">Filter by Make</option>
+          <option value="status">Filter by Status</option>
+        </select>
+        <input
+          v-model="searchQuery"
+          type="text"
+          placeholder="Search..."
+          class="p-2 bg-white focus:outline-none rounded text-black w-2/3" />
+      </div>
     </div>
 
     <ul

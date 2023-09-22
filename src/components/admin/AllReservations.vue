@@ -1,5 +1,10 @@
 <template>
   <div class="container mx-auto px-4 py-8">
+    <h1
+      v-if="currentPath === '/admin/reservations'"
+      class="font-bold text-2xl my-8 sm:text-3xl text-left">
+      Users
+    </h1>
     <table class="min-w-full border rounded-lg overflow-hidden">
       <thead class="bg-gray-200">
         <tr>

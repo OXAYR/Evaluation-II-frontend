@@ -1,5 +1,5 @@
 <template>
-  <div class="my-8 sm:my-16 md:my-32 text-silver text-left">
+  <div class="my-8 sm:my-16 md:my-24 text-silver text-left">
     <h1 class="font-bold text-2xl sm:text-3xl text-left">Cars</h1>
     <ul
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">

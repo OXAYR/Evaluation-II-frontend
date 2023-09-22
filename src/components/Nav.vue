@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="bg-navblue py-5 fixed top-0 left-0 right-0 font-serif">
+    <nav class="bg-white py-5 fixed top-0 left-0 right-0 font-serif">
       <div class="flex justify-between items-center px-10">
         <div class="flex col-span-7">
           <router-link to="/home">
@@ -12,14 +12,14 @@
         <div class="flex">
           <router-link
             to="/home/account"
-            class="text-black shadow-sm border border-black hover:bg-black hover:text-white rounded p-2 ml-4 mt-1">
+            class="shadow-sm border border-black hover:bg-black hover:text-white rounded p-2 ml-4 mt-1">
             Account
           </router-link>
-          <!-- <router-link
-            to="/home/cart"
-            class="text-silver shadow-sm hover:bg-blue hover:text-white rounded p-3 ml-4 mt-1 mr-4">
-            cart
-          </router-link> -->
+          <router-link
+            to="/home/reservations"
+            class="text-silver shadow-sm border border-black hover:bg-black hover:text-white rounded p-2 ml-4 mt-1 mr-4">
+            Reservations
+          </router-link>
         </div>
       </div>
     </nav>

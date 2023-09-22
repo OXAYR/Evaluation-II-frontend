@@ -151,10 +151,10 @@ export default {
         };
         // console.log('config ',config)
         const { data } = await axios.delete(`/reservations/${id}`, config, _id);
-        console.log(
-          "RESPONSE RECIEVED From remove reservation",
-          data.data.reservations.bookings
-        );
+        // console.log(
+        //   "RESPONSE RECIEVED From remove reservation",
+        //   data.data.reservations.bookings
+        // );
         commit("SET_RESERVATION", data.data.reservations.bookings);
       } catch (error) {
         console.error("Error deleting item from reservation:", error);

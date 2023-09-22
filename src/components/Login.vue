@@ -21,7 +21,7 @@
     <button
       class="mt-4 px-12 py-2 sm:px-24 sm:py-3 bg-yellow-400 text-black hover:bg-yellow-300 rounded-full"
       @click="toValidateForm(formLogin)">
-      <p class="text-white font-serif text-center">Login</p>
+      <p class="text-black font-serif text-center">Login</p>
     </button>
 
     <router-link to="/signup" class="block mt-2">

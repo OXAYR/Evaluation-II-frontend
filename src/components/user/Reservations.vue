@@ -1,43 +1,35 @@
 <template>
-  <div
-    class="text-silver"
-    :class="{ 'lg:mr-96': currentPath === '/admin/users' }">
-    <h1
-      v-if="currentPath === '/admin/users'"
-      class="font-bold text-2xl my-8 sm:text-3xl text-left">
-      Users
-    </h1>
-    <div class="w-full sm:w-auto overflow-x-auto">
-      <div v-if="isLoading" class="text-center mt-4">
-        <div class="spinner-border text-primary" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
-      <table class="w-full border-collapse border border-gray-300">
-        <thead>
-          <tr class="font-bold divide-x divide-lightestBlue">
-            <th class="w-1/3 sm:w-auto px-4 py-2">Name</th>
-            <th class="w-1/3 sm:w-auto px-4 py-2">Email</th>
-            <th class="w-1/3 sm:w-auto px-4 py-2">User Role</th>
-            <th class="w-1/3 sm:w-auto px-4 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in users" :key="user._id" class="my-2">
-            <td class="w-1/3 sm:w-auto px-4 py-2">{{ user.name }}</td>
-            <td class="w-1/3 sm:w-auto px-4 py-2">{{ user.email }}</td>
-            <td class="w-1/3 sm:w-auto px-4 py-2">{{ user.userRole }}</td>
-            <td class="w-1/3 sm:w-auto px-4 py-2">
-              <button
-                @click="deleteUser(user)"
-                class="bg-black text-white px-2 py-1 rounded-2xl hover:bg-gray-800">
-                x
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="container card mx-auto mt-8">
+    <h1 class="text-3xl font-semibold mb-4">My Reservations</h1>
+    <table class="w-full border-collapse border border-gray-300">
+      <thead>
+        <tr>
+          <th class="p-4 border-b">Car Name</th>
+          <th class="p-4 border-b">Start Date</th>
+          <th class="p-4 border-b">End Date</th>
+          <th class="p-4 border-b">Rent</th>
+          <th class="p-4 border-b">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="reservation in reservations"
+          :key="reservation.id"
+          class="border-b">
+          <td class="p-4">{{ reservation.name }}</td>
+          <td class="p-4">{{ formatDate(reservation.startDate) }}</td>
+          <td class="p-4">{{ formatDate(reservation.endDate) }}</td>
+          <td class="p-4">{{ reservation.rent }}</td>
+          <td class="p-4">
+            <button
+              @click="deleteReservation(reservation.carId)"
+              class="bg-black text-white px-2 rounded-2xl hover:bg-gray-800">
+              x
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 

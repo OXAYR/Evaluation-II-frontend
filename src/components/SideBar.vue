@@ -12,7 +12,7 @@
         'translate-x-0': isSidebarOpen,
         '-translate-x-full': !isSidebarOpen,
       }"
-      class="fixed top-0 left-0 h-screen w-72 p-4 text-white bg-gray-900 transition-transform transform ease-in-out duration-300 lg:translate-x-0">
+      class="fixed top-0 left-0 h-screen w-72 p-4 text-white bg-gray-950 transition-transform transform ease-in-out duration-300 lg:translate-x-0">
       <div class="mt-10">
         <router-link to="/" class="mb-4">
           <p class="font-semibold text-3xl text-silver">RentWheels</p>

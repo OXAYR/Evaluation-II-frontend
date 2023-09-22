@@ -86,6 +86,7 @@
                 type="date"
                 id="rent"
                 v-model="reservation.endDate"
+                :min="reservation.startDate"
                 class="mt-1 p-2 block w-full border border-gray-300 rounded-md"
                 placeholder="Enter End Date" />
             </div>
@@ -114,6 +115,8 @@
 <script setup>
 import { useStore } from "vuex";
 import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const store = useStore();
 const selectedCar = computed(() => store.getters["car/getSelectedCar"]);
 const reservation = ref({
@@ -132,7 +135,7 @@ const formatDate = (dateString) => {
   }
 };
 
-const validateReservation = () => {
+const validateReservation = async () => {
   //console.log(car);
   if (reservation.startDate !== "" && reservation.endDate !== "") {
     const newReservation = {
@@ -141,7 +144,8 @@ const validateReservation = () => {
       rent: selectedCar.value.rent,
     };
     console.log("Data to create car:", newReservation);
-    store.dispatch("reservations/makeAReservation", newReservation);
+    await store.dispatch("reservations/makeAReservation", newReservation);
+    router.push("/home/reservations");
   } else {
     error.value = "Please fill in all fields.";
   }

@@ -3,10 +3,10 @@
     <router-link to>
       <div class="flex flex-col h-full">
         <div class="flex justify-between items-center mb-4 px-4 py-2">
-          <h1 class="font-bold text-3xl">Users</h1>
+          <h1 class="font-bold text-3xl">Reservations</h1>
         </div>
         <div class="overflow-y-auto p-4">
-          <Users />
+          <AllReservations />
         </div>
       </div>
     </router-link>
@@ -14,5 +14,5 @@
 </template>
 
 <script setup>
-import Users from "@/components/admin/Users.vue";
+import AllReservations from "@/components/admin/AllReservations.vue";
 </script>

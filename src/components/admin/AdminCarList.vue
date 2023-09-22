@@ -1,6 +1,6 @@
 <template>
-  <div class="my-8 sm:my-16 md:my-24 text-silver text-left">
-    <h1 class="font-bold text-2xl sm:text-3xl text-left">Cars</h1>
+  <div class="my-4 sm:my-12 md:my-8 text-silver text-left">
+    <h1 class="font-bold text-2xl sm:text-3xl text-left">Cars You Manage</h1>
     <ul
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
       <li

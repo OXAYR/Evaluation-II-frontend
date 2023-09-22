@@ -13,6 +13,7 @@ import AdminCarListView from "@/views/adminviews/AdminCarListView.vue";
 import Reservations from "@/components/user/Reservations.vue";
 import Users from "@/components/admin/Users.vue";
 import AllReservations from "@/components/admin/AllReservations.vue";
+import Dashboard from "@/views/adminviews/DashBoardView.vue";
 
 const routes = [
   {
@@ -66,8 +67,8 @@ const routes = [
     children: [
       {
         path: "",
-        name: "addcar",
-        component: AddCar,
+        name: "dashboard",
+        component: Dashboard,
       },
       {
         path: "admincars",

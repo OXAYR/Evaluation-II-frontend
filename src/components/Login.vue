@@ -19,14 +19,14 @@
       {{ validationErrors }}
     </p> -->
     <button
-      class="mt-4 px-12 py-2 sm:px-24 sm:py-3 bg-blue text-white hover:bg-lightBlue rounded-full"
+      class="mt-4 px-12 py-2 sm:px-24 sm:py-3 bg-yellow-400 text-black hover:bg-yellow-300 rounded-full"
       @click="toValidateForm(formLogin)">
       <p class="text-white font-serif text-center">Login</p>
     </button>
 
     <router-link to="/signup" class="block mt-2">
       <button
-        class="Register px-12 py-2 sm:px-24 sm:py-3 bg-white hover:bg-silver rounded-full">
+        class="Register px-12 py-2 sm:px-24 sm:py-3 text-black hover:bg-gray-200 rounded-full">
         <p class="text-black font-serif ml-2">SignUp</p>
       </button>
     </router-link>

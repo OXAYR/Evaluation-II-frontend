@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-4 lg:ml-32">
+  <div class="ml-4 lg:ml-12">
     <div class="my-5 flex flex-col items-center">
       <div
         class="max-w-md flex flex-wrap justify-between w-full bg-white rounded-lg shadow-md p-4 sm:p-6">
@@ -104,8 +104,9 @@
 <script setup>
 import { useStore } from "vuex";
 import { ref, computed } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
+const router = useRouter();
 const currentRoute = ref(route.path);
 const store = useStore();
 const selectedCar = computed(() => store.getters["car/getSelectedCar"]);
@@ -142,7 +143,7 @@ const selectColor = (selectedColor) => {
   car.value.color = selectedColor;
   console.log("car color------->", car.color);
 };
-const validateCar = () => {
+const validateCar = async () => {
   console.log("car in the add to car", car.value);
   if (
     car.name !== "" &&
@@ -153,11 +154,12 @@ const validateCar = () => {
     car.color !== ""
   ) {
     isUpdate.value
-      ? store.dispatch("car/updateCar", {
+      ? await store.dispatch("car/updateCar", {
           indx: selectedCar.value._id,
           updateCar: car.value,
         })
-      : store.dispatch("car/addCar", car.value);
+      : await store.dispatch("car/addCar", car.value);
+    router.push("/admin");
   } else {
     error.value = "Please fill in all fields.";
   }

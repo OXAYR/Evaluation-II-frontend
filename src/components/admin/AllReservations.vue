@@ -1,18 +1,18 @@
 <template>
-  <div class="container mx-auto px-4 py-8">
+  <div class="container mx-auto px-4">
     <h1
       v-if="currentPath === '/admin/reservations'"
       class="font-bold text-2xl my-8 sm:text-3xl text-left">
-      Users
+      Reservations
     </h1>
-    <table class="min-w-full border rounded-lg overflow-hidden">
-      <thead class="bg-gray-200">
+    <table class="min-w-full border rounded overflow-hidden">
+      <thead class="bg-gray-50 text-blue-950 divide-y divide-gray-500">
         <tr>
           <th class="px-4 py-2">User</th>
           <th class="px-4 py-2">Number of Reservations</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="divide-y divide-y-100">
         <tr
           v-for="(userData, index) in userReservations"
           :key="userData.reservationId"
@@ -38,10 +38,13 @@
 import UserReservations from "./UserReservations.vue";
 import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 const store = useStore();
 const expandedRow = ref(null);
-
+const currentPath = ref(route.path);
 const userReservations = computed(
   () => store.getters["reservations/getAllReservations"]
 );

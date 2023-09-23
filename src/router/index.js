@@ -31,11 +31,23 @@ const routes = [
   {
     path: "/home",
     component: HomeView,
+    meta: {
+      adminAuth: false,
+      ownerAuth: false,
+      requiresAuth: true,
+      userAuth: true,
+    },
   },
   {
     path: "/home/user",
     name: "Home",
     component: UserLayout,
+    meta: {
+      adminAuth: false,
+      ownerAuth: false,
+      requiresAuth: true,
+      userAuth: true,
+    },
     children: [
       {
         path: "",
@@ -75,6 +87,12 @@ const routes = [
     path: "/manager",
     name: "admin",
     component: AdminLayout,
+    meta: {
+      adminAuth: true,
+      ownerAuth: false,
+      requiresAuth: true,
+      userAuth: false,
+    },
     children: [
       {
         path: "",
@@ -114,6 +132,12 @@ const routes = [
     path: "/owner",
     name: "owner",
     component: AdminLayout,
+    meta: {
+      adminAuth: false,
+      ownerAuth: true,
+      requiresAuth: true,
+      userAuth: false,
+    },
     children: [
       {
         path: "",
@@ -149,6 +173,38 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+});
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = JSON.parse(localStorage.getItem("userAuth"));
+    console.log("in the navigation guards------>", user.userRole);
+
+    if (!user || !token) {
+      next({ name: "login" });
+    } else if (to.meta.adminAuth) {
+      if (user.userRole.toLowerCase() === "manager") {
+        next();
+      } else {
+        next("/home");
+      }
+    } else if (to.meta.ownerAuth) {
+      if (user.userRole.toLowerCase() === "owner") {
+        next();
+      } else {
+        next("/manager");
+      }
+    } else if (to.meta.userAuth) {
+      if (user.userRole.toLowerCase() === "user") {
+        next();
+      } else {
+        console.log("I am in admin");
+        next("/owner");
+      }
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;

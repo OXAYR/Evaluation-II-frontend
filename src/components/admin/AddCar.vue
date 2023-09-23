@@ -159,7 +159,7 @@ const validateCar = async () => {
           updateCar: car.value,
         })
       : await store.dispatch("car/addCar", car.value);
-    router.push("/admin");
+    router.push("/manager");
   } else {
     error.value = "Please fill in all fields.";
   }

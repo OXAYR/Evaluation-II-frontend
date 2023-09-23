@@ -40,12 +40,12 @@
           <div class="flex mt-4">
             <button
               @click="deleteCar(car.id)"
-              class="flex-1 bg-red-500 text-black font-medium rounded-lg p-2 mr-2 opacity-0 group-hover:opacity-100">
+              class="flex-1 bg-rose-500 text-black font-medium rounded-lg p-2 mr-2 opacity-0 group-hover:opacity-100">
               Delete
             </button>
             <button
               @click="editCar(car.id)"
-              class="flex-1 bg-yellow-400 text-black font-medium rounded-lg p-2 opacity-0 group-hover:opacity-100">
+              class="flex-1 bg-blue-400 text-black font-medium rounded-lg p-2 opacity-0 group-hover:opacity-100">
               Edit
             </button>
           </div>

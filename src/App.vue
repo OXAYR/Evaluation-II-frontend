@@ -9,7 +9,7 @@
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif, "Lato", "Montserrat",
-    ""Roboto"", "Playfair Display";
+    "" Roboto "", "Playfair Display";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

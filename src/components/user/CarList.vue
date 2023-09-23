@@ -1,8 +1,8 @@
 <template>
   <div class="my-8 sm:my-16 md:my-32 text-silver text-left">
-    <h1 class="font-bold text-2xl sm:text-3xl text-left">Cars</h1>
-    <div class="flex justify-end p-5 text-white rounded-lg items-center mt-4">
-      <div class="bg-white border-gray-700 rounded-lg w-1/2">
+    <div
+      class="flex justify-center p-3 text-white rounded-lg items-center mt-4">
+      <div class="bg-white p-5 border-gray-700 rounded-lg w-1/2">
         <select
           v-model="selectedFilter"
           class="p-3 border bg-white focus:outline-none border-gray-300 rounded text-black">
@@ -20,6 +20,7 @@
           class="p-2 bg-white focus:outline-none rounded text-black w-2/3" />
       </div>
     </div>
+    <h1 class="font-bold text-2xl sm:text-3xl text-left">Cars</h1>
 
     <ul
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
@@ -38,7 +39,9 @@
             <div class="text-lg font-semibold text-blue">
               {{ car.name }}
             </div>
-            <div class="text-lg font-semibold">Rs. {{ car.rent }} /-</div>
+            <div class="text-lg text-rose-900 font-semibold">
+              Rs. {{ car.rent }} /-
+            </div>
           </div>
           <div class="text-gray-500 text-sm">
             Status:
@@ -64,7 +67,7 @@
             :class="
               car.status === 'Hired'
                 ? 'bg-gray-300 w-full text-gray-500 cursor-not-allowed font-medium rounded-lg p-2'
-                : 'w-full bg-yellow-300 text-black hover:bg-yellow-400 font-medium rounded-lg p-2'
+                : 'w-full bg-rose-500 text-white hover:bg-rose-600 font-medium  rounded-lg p-2'
             "
             :disabled="car.status === 'Hired'">
             Book me

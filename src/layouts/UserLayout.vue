@@ -1,19 +1,16 @@
 <template>
   <div>
-    <Nav />
+    <div class="bg-white">
+      <Nav />
+      <Banner />
+    </div>
     <div class="mt-40 px-24">
       <router-view />
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import Nav from "@/components/Nav.vue";
-
-export default {
-  name: "UserLayout",
-  components: {
-    Nav,
-  },
-};
+import Banner from "@/components/user/Banner.vue";
 </script>

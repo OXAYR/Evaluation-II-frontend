@@ -1,10 +1,10 @@
 <template>
   <div>
-    <BookACar />
-    <router-view />
+    <CarListView />
   </div>
 </template>
 
 <script setup>
-import BookACar from "@/components/user/BookACar.vue";
+import CarListView from "./CarListView.vue";
+import Banner from "@/components/user/Banner.vue";
 </script>

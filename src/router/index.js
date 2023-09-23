@@ -34,7 +34,7 @@ const routes = [
       {
         path: "",
         name: "CarList",
-        component: CarListView,
+        component: HomeView,
       },
       {
         path: "account",

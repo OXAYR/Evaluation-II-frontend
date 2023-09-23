@@ -39,7 +39,7 @@ const { name, email, _id } = JSON.parse(localStorage.getItem("user"));
 
 const update = (index) => {
   console.log("sending in params----->", index);
-  router.push({ path: `/home/account/${index}` });
+  router.push({ path: `/home/user/account/${index}` });
 };
 
 const deleteUserAccount = (index) => {

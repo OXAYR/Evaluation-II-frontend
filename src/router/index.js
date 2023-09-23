@@ -28,13 +28,17 @@ const routes = [
   },
   {
     path: "/home",
+    component: HomeView,
+  },
+  {
+    path: "/home/user",
     name: "Home",
     component: UserLayout,
     children: [
       {
         path: "",
         name: "CarList",
-        component: HomeView,
+        component: CarListView,
       },
       {
         path: "account",

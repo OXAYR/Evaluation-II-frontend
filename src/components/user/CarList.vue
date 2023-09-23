@@ -28,11 +28,11 @@
         v-for="car in filteredCars"
         :key="car.id"
         class="bg-blue shadow-md rounded-lg group">
-        <div class="relative">
+        <div class="relative bg-white">
           <img
-            src="../../assets/car.jpg"
+            src="../../assets/car.png"
             alt="car image"
-            class="w-full h-40 object-cover rounded-t-lg" />
+            class="w-full h-40 object-cover rounded-t-lg bg-white" />
         </div>
         <div class="bg-white p-4 rounded-b-lg">
           <div class="flex justify-between">
@@ -67,7 +67,7 @@
             :class="
               car.status === 'Hired'
                 ? 'bg-gray-300 w-full text-gray-500 cursor-not-allowed font-medium rounded-lg p-2'
-                : 'w-full bg-rose-500 text-white hover:bg-rose-600 font-medium  rounded-lg p-2'
+                : 'w-full bg-rose-500 text-black hover:bg-rose-600 font-medium  rounded-lg p-2'
             "
             :disabled="car.status === 'Hired'">
             Book me
@@ -123,6 +123,6 @@ const formatDate = (dateString) => {
 
 const reservedCar = (car) => {
   emit("reserve-car", car);
-  router.push({ path: `/home/reserve/${car.id}` });
+  router.push({ path: `/home/user/reserve/${car.id}` });
 };
 </script>

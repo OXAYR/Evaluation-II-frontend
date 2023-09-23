@@ -11,12 +11,12 @@
         </div>
         <div class="flex">
           <router-link
-            to="/home/account"
-            class="shadow-sm border border-white text-white hover:bg-white hover:text-black rounded p-2 ml-4 mt-1">
+            to="/home/user/account"
+            class="shadow-sm text-black bg-rose-500 hover:bg-rose-600 rounded p-2 ml-4 mt-1">
             {{ name }}
           </router-link>
           <router-link
-            to="/home/reservations"
+            to="/home/user/reservations"
             class="text-silver shadow-sm text-black bg-rose-500 hover:bg-rose-600 rounded p-2 ml-4 mt-1 mr-4">
             Reservations
           </router-link>

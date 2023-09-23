@@ -45,15 +45,9 @@ const route = useRoute();
 const store = useStore();
 const expandedRow = ref(null);
 const currentPath = ref(route.path);
-const { _id } = JSON.parse(localStorage.getItem("user"));
-
-const userReservations = computed(() => {
-  const allReservations = store.getters["reservations/getAllReservations"];
-
-  return allReservations.filter((reservation) =>
-    reservation.bookings.some((booking) => booking.managerId === _id)
-  );
-});
+const userReservations = computed(
+  () => store.getters["reservations/getAllReservations"]
+);
 
 onMounted(async () => {
   await store.dispatch("reservations/getAllReservation");

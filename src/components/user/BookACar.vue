@@ -95,14 +95,14 @@
         </div>
         <div class="w-full sm:w-1/2 pl-2 flex justify-center items-center">
           <img
-            src="../../assets/carView.jpg"
+            src="../../assets/carView.png"
             alt="car-view"
             title="car-view"
-            class="cursor-pointer" />
+            class="cursor-pointer bg-gradient-to-b from-white to-gray-50 rounded-lg" />
         </div>
         <div class="w-full">
           <button
-            class="mt-4 w-full py-2 bg-lightBlue font-bold rounded-lg text-black font-serif bg-yellow-300 hover:bg-yellow-400"
+            class="mt-4 w-full py-2 bg-lightBlue font-bold rounded-lg text-black font-serif bg-rose-500 hover:bg-rose-400"
             @click="validateReservation()">
             Make A Reservation
           </button>
@@ -145,7 +145,7 @@ const validateReservation = async () => {
     };
     console.log("Data to create car:", newReservation);
     await store.dispatch("reservations/makeAReservation", newReservation);
-    router.push("/home/reservations");
+    router.push("/home/user/reservations");
   } else {
     error.value = "Please fill in all fields.";
   }

@@ -4,7 +4,7 @@
     <ul
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
       <li
-        v-for="car in filteredCars"
+        v-for="car in cars"
         :key="car.id"
         class="bg-blue shadow-md rounded-lg group relative hover:shadow-lg">
         <div class="relative">
@@ -73,8 +73,6 @@ const formatDate = (dateString) => {
     return date.getFullYear();
   }
 };
-const { _id } = JSON.parse(localStorage.getItem("user"));
-const filteredCars = props.cars.filter((car) => car.managerId === _id);
 
 const editCar = async (carId) => {
   await store.dispatch("car/fetchCarById", carId);

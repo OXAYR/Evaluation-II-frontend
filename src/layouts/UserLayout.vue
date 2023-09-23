@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div class="bg-white">
-      <Nav />
-      <Banner />
-    </div>
+    <Nav />
     <div class="mt-40 px-24">
       <router-view />
     </div>

@@ -63,7 +63,7 @@ const fetchUsers = async () => {
   }
 };
 
-const usersRef = toRef(store.getters["user/getAllUsers"]); // Convert toRef
+const usersRef = toRef(store.getters["user/getAllUsers"]); 
 
 const users = computed(() => {
   const usersArray = Array.isArray(usersRef.value) ? usersRef.value : [];
@@ -75,17 +75,10 @@ const deleteUser = async (user) => {
     var answer = confirm("Do you really want to delete the user?");
     if (answer) {
       isLoading.value = true;
-      if (user.userRole.toLowerCase() === "manager") {
-        console.log("i am manager");
-        await store.dispatch("user/deleteManager", {
-          id: user._id,
-        });
-      } else {
-        console.log("i am user");
-        await store.dispatch("user/deleteUserAccount", {
-          id: user._id,
-        });
-      }
+      console.log("i am user");
+      await store.dispatch("user/deleteUserAccount", {
+        id: user._id,
+      });
       isLoading.value = false;
     }
   } catch (error) {

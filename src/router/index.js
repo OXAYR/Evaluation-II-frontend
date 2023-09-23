@@ -13,8 +13,8 @@ import AdminCarListView from "@/views/adminviews/AdminCarListView.vue";
 import Reservations from "@/components/user/Reservations.vue";
 import Users from "@/components/admin/Users.vue";
 import AllReservations from "@/components/admin/AllReservations.vue";
-import Dashboard from "@/views/adminviews/DashBoardView.vue";
 import OwnerDashboard from "@/views/ownerviews/OwnerDashBoardView.vue";
+import DashBoardView from "@/views/adminviews/ManagerDashBoardView.vue";
 import OwnerUsers from "@/components/owner/OwnerUsers.vue";
 
 const routes = [
@@ -67,18 +67,18 @@ const routes = [
   },
 
   {
-    path: "/admin",
+    path: "/manager",
     name: "admin",
     component: AdminLayout,
     children: [
       {
         path: "",
-        name: "dashboard",
-        component: Dashboard,
+        name: "managerDashboardHome",
+        component: DashBoardView,
       },
       {
         path: "vehicles",
-        name: "adminCarList",
+        name: "managerCarList",
         component: AdminCarListView,
       },
       {
@@ -103,7 +103,7 @@ const routes = [
     children: [
       {
         path: "",
-        name: "dashboard",
+        name: "ownerDashboard",
         component: OwnerDashboard,
       },
       {

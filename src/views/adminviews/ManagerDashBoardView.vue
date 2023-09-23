@@ -33,4 +33,5 @@ import AdminCarListView from "./AdminCarListView.vue";
 import UserView from "./UserView.vue";
 import ReservationsView from "@/views/adminviews/ReservationView.vue";
 import AddCar from "@/components/admin/AddCar.vue";
+console.log("I am in the dashboard");
 </script>

@@ -11,15 +11,14 @@
     </div>
 
     <div
-      class="flex flex-col gap-4 flex-wrap lg:flex-row justify-evenly sm:items-start my-4">
+      class="flex flex-col gap-4 flex-wrap lg:flex-row justify-between sm:items-start my-4">
       <AddCar />
       <CreateManager />
-
-      <div class="hidden md:block">
-        <ReservationsView />
-      </div>
-      <div class="hidden md:block">
-        <UserView class="" />
+    </div>
+    <div>
+      <div class="hidden ml-12 md:block"><UserView class="w-full" /></div>
+      <div class="hidden ml-12 md:block">
+        <ReservationsView class="w-full" />
       </div>
     </div>
 

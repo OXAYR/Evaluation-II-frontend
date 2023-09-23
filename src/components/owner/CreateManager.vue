@@ -1,7 +1,7 @@
 <template>
   <div
     class="card bg-white mt-6 px-4 sm:px-8 py-96 h-full md:py-11 max-w-xs mx-auto">
-    <h2 class="text-3xl font-medium text-center">Create Manager</h2>
+    <h2 class="text-3xl font-bold text-center">Create Manager</h2>
     <form enctype="multipart/form-data">
       <input
         type="text"
@@ -45,7 +45,7 @@ const form = ref({
   name: "",
   email: "",
   password: "",
-  userRole: "admin",
+  userRole: "manager",
 });
 
 const confirmPassword = ref("");

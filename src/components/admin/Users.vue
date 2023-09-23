@@ -63,9 +63,8 @@ const fetchUsers = async () => {
   }
 };
 
-const usersRef = toRef(store.getters["user/getAllUsers"]); 
-
 const users = computed(() => {
+  const usersRef = toRef(store.getters["user/getAllUsers"]);
   const usersArray = Array.isArray(usersRef.value) ? usersRef.value : [];
   return usersArray.filter((user) => user.userRole.toLowerCase() === "user");
 });

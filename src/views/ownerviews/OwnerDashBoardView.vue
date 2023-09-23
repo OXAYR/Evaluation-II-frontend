@@ -2,7 +2,7 @@
   <div class="">
     <div class="bg-white p-4 text-left my-4 rounded lg:ml-12">
       <h1 class="text-2xl sm:text-3xl font-bold text-silver">
-        Welcome Back, Manager
+        Welcome Back, Owner
       </h1>
       <p class="text-sm font-medium text-silver">
         Here you can create, edit, manage cars, view users, and handle

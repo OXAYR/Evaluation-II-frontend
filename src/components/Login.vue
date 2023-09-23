@@ -19,7 +19,7 @@
       {{ validationErrors }}
     </p> -->
     <button
-      class="mt-4 px-12 py-2 sm:px-24 sm:py-3 bg-rose-400 text-black hover:bg-rose-300 rounded-lg"
+      class="mt-4 px-12 py-2 sm:px-28 sm:py-3 bg-rose-400 text-black hover:bg-rose-300 rounded-lg"
       @click="toValidateForm(formLogin)">
       <p class="text-black font-serif text-center">Login</p>
     </button>

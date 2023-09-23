@@ -35,7 +35,7 @@
       {{ validationErrors.confirmPassword }}
     </p>
     <button
-      class="mt-4 px-4 sm:px-8 py-2 sm:py-3 text-white bg-blue hover:bg-lightBlue rounded-full"
+      class="mt-4 px-4 sm:px-24 py-2 sm:py-3 text-black hover:bg-gray-200 rounded"
       @click="toValidateForm(form)">
       Register
     </button>

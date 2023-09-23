@@ -4,7 +4,7 @@ import SignupView from "@/views/SignupView.vue";
 import HomeView from "@/views/userviews/HomeView.vue";
 import CarListView from "@/views/userviews/CarListView.vue";
 import UserLayout from "@/layouts/UserLayout.vue";
-import UserAccount from "@/components/user/UserAccount.vue";
+import AccountSettings from "@/components/user/UserAccount.vue";
 import EditUser from "@/components/user/EditUser.vue";
 import BookACar from "@/components/user/BookACar.vue";
 import AdminLayout from "@/layouts/AdminLayout.vue";
@@ -45,7 +45,7 @@ const routes = [
       {
         path: "account",
         name: "Account",
-        component: UserAccount,
+        component: AccountSettings,
       },
       {
         path: "account/:id",
@@ -86,6 +86,15 @@ const routes = [
         component: AddCar,
       },
       {
+        path: "account",
+        name: "managerAccount",
+        component: AccountSettings,
+      },
+      {
+        path: "account/:id",
+        component: EditUser,
+      },
+      {
         path: "users",
         component: Users,
       },
@@ -112,8 +121,17 @@ const routes = [
         component: AdminCarListView,
       },
       {
+        path: "account",
+        name: "OwnerAccount",
+        component: AccountSettings,
+      },
+      {
         path: "users",
         component: OwnerUsers,
+      },
+      {
+        path: "account/:id",
+        component: EditUser,
       },
       {
         path: "bookings",

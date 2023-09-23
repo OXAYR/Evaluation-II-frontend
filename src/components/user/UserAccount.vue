@@ -15,7 +15,7 @@
 
       <button
         @click="update(_id)"
-        class="bg-yellow-300 text-black px-4 py-2 rounded-lg hover:bg-yellow-400 mr-2">
+        class="bg-blue-300 text-black px-4 py-2 rounded-lg hover:bg-blue-400 mr-2">
         Edit
       </button>
 
@@ -23,6 +23,11 @@
         @click="deleteUserAccount(_id)"
         class="bg-red-400 text-black px-4 py-2 rounded-lg hover:bg-red-500">
         Delete Account
+      </button>
+      <button
+        @click="logout()"
+        class="bg-indigo-500 text-white px-4 py-2 ml-2 rounded-lg hover:bg-indigo-600">
+        Log out
       </button>
     </div>
   </div>
@@ -35,11 +40,21 @@ import { useStore } from "vuex";
 const store = useStore();
 const router = useRouter();
 
-const { name, email, _id } = JSON.parse(localStorage.getItem("user"));
+const { name, email, _id, userRole } = JSON.parse(localStorage.getItem("user"));
 
 const update = (index) => {
   console.log("sending in params----->", index);
-  router.push({ path: `/home/user/account/${index}` });
+  if (userRole.toLowerCase() === "user")
+    router.push({ path: `/home/user/account/${index}` });
+  else {
+    router.push({ path: `/${userRole.toLowerCase()}/account/${index}` });
+  }
+};
+
+const logout = () => {
+  localStorage.clear();
+  store.$reset;
+  router.push("/");
 };
 
 const deleteUserAccount = (index) => {

@@ -90,6 +90,7 @@ export default {
     },
     async deleteUserAccount({ commit }, id) {
       try {
+        console.log(id);
         await axios.delete(`/users/${id}`);
         commit("DELETE_USER", null);
       } catch (error) {

@@ -13,9 +13,11 @@ import AdminCarListView from "@/views/adminviews/AdminCarListView.vue";
 import Reservations from "@/components/user/Reservations.vue";
 import Users from "@/components/admin/Users.vue";
 import AllReservations from "@/components/admin/AllReservations.vue";
+import OwnerAllReservations from "@/components/owner/OwnerAllReservations.vue";
 import OwnerDashboard from "@/views/ownerviews/OwnerDashBoardView.vue";
 import DashBoardView from "@/views/adminviews/ManagerDashBoardView.vue";
 import OwnerUsers from "@/components/owner/OwnerUsers.vue";
+import OwnerCarListView from "@/views/ownerviews/OwnerCarListView.vue";
 
 const routes = [
   {
@@ -147,7 +149,7 @@ const routes = [
       {
         path: "vehicles",
         name: "ownercarlist",
-        component: AdminCarListView,
+        component: OwnerCarListView,
       },
       {
         path: "account",
@@ -156,15 +158,18 @@ const routes = [
       },
       {
         path: "users",
+        name: "owner users",
         component: OwnerUsers,
       },
       {
         path: "account/:id",
+        name: "edit owner account",
         component: EditUser,
       },
       {
         path: "bookings",
-        component: AllReservations,
+        name: "owner bookings",
+        component: OwnerAllReservations,
       },
     ],
   },

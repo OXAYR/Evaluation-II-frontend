@@ -14,5 +14,5 @@
 </template>
 
 <script setup>
-import AllReservations from "@/components/owner/AllReservations.vue";
+import AllReservations from "@/components/owner/OwnerAllReservations.vue";
 </script>

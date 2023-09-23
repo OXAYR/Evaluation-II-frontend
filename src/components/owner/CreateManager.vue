@@ -22,7 +22,7 @@
       <input
         type="password"
         placeholder="Confirm Password"
-        v-model="form.confirmPassword"
+        v-model="confirmPassword"
         class="mt-4 p-2 border border-gray-300 rounded-md w-full" />
     </form>
     <p v-if="validationErrors.confirmPassword" class="text-red text-sm">
@@ -50,51 +50,61 @@ const form = ref({
 
 const confirmPassword = ref("");
 const validationErrors = ref({
-  name: "",
-  password: "",
-  email: "",
-  confirmPassword: "",
+  name: [],
+  password: [],
+  email: [],
+  confirmPassword: [],
 });
 
 const store = useStore();
 const router = useRouter();
-const toValidateForm = (obj) => {
-  validationErrors.value = [];
-  const usernamePattern = new RegExp("/^[A-Z][^\s]*$/");
-  const passwordPattern = new RegExp(
-    "^(?=.*[A-Z])(?=.*[0-9!@#$%^&*()_+{}[\\]:;<>,.?~\\/\\-=\\'|\"]).{8,}$"
-  );
-  const emailPattern = new RegExp(
-    "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
-  );
 
-  if (obj.name !== "" && !usernamePattern.test(obj.name)) {
-    validationErrors.name.value.push(
+const toValidateForm = () => {
+  // Reset validation errors
+  validationErrors.value = {
+    name: [],
+    password: [],
+    email: [],
+    confirmPassword: [],
+  };
+
+  const usernamePattern = /^[A-Z][^\s]*$/;
+  const passwordPattern =
+    /^(?=.*[A-Z])(?=.*[0-9!@#$%^&*()_+{}[\]:;<>,.?~\/-=\'|"]).{8,}$/;
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  if (form.value.name !== "" && !usernamePattern.test(form.value.name)) {
+    validationErrors.value.name.push(
       "Add a number in the name and remove empty spaces"
     );
-  } else if (obj.password !== "" && !passwordPattern.test(obj.password)) {
-    validationErrors.password.value.push(
+  } else if (
+    form.value.password !== "" &&
+    !passwordPattern.test(form.value.password)
+  ) {
+    validationErrors.value.password.push(
       "Password must start with a capital letter and must contain a number & special character"
     );
-  } else if (obj.password !== confirmPassword.value) {
-    validationErrors.confirmPassword.value.push("Password does not match");
-  } else if (obj.email !== "" && !emailPattern.test(obj.email)) {
-    validationErrors.email.value.push("Invalid Email");
+  } else if (form.value.password !== confirmPassword.value) {
+    validationErrors.value.confirmPassword.push("Password does not match");
+  } else if (form.value.email !== "" && !emailPattern.test(form.value.email)) {
+    validationErrors.value.email.push("Invalid Email");
   } else {
-    toStoreForm(obj);
+    toStoreForm(form.value);
   }
 };
 
-const toStoreForm = async (obj) => {
+const toStoreForm = async (formData) => {
   if (
-    obj.value.email !== "" &&
-    obj.value.password !== "" &&
-    obj.value.name !== "" &&
-    obj.value.confirmPassword !== ""
+    formData.email !== "" &&
+    formData.password !== "" &&
+    formData.name !== "" &&
+    confirmPassword.value !== ""
   ) {
-    console.log("In the component to store--->", form.value);
-    await store.dispatch("user/registerUser", form.value);
-    if (!validationErrors.value) router.push("/owner");
+    console.log("In the component to store--->", formData);
+    await store.dispatch("user/registerUser", formData);
+    if (Object.keys(validationErrors.value).length === 0) {
+      alert("Manager created successfully");
+    }
   }
 };
 </script>

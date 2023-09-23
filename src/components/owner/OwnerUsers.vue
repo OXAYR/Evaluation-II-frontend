@@ -76,14 +76,10 @@ const deleteUser = async (user) => {
       isLoading.value = true;
       if (user.userRole.toLowerCase() === "manager") {
         console.log("i am manager");
-        await store.dispatch("user/deleteManager", {
-          id: user._id,
-        });
+        await store.dispatch("user/deleteManager", user._id);
       } else {
         console.log("i am user");
-        await store.dispatch("user/deleteUserAccount", {
-          id: user._id,
-        });
+        await store.dispatch("user/deleteUserAccount", user._id);
       }
       isLoading.value = false;
     }

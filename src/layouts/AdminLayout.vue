@@ -8,12 +8,6 @@
     </div>
   </div>
 </template>
-<script>
+<script setup>
 import SideBar from "@/components/SideBar.vue";
-export default {
-  name: "AdminLayout",
-  components: {
-    SideBar,
-  },
-};
 </script>

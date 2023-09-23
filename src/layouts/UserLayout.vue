@@ -9,5 +9,4 @@
 
 <script setup>
 import Nav from "@/components/Nav.vue";
-import Banner from "@/components/user/Banner.vue";
 </script>

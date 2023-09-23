@@ -43,7 +43,7 @@
 
 <script setup>
 import { useStore } from "vuex";
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref, computed, toRef } from "vue";
 import { useRoute } from "vue-router";
 
 const store = useStore();
@@ -63,7 +63,12 @@ const fetchUsers = async () => {
   }
 };
 
-const users = computed(() => store.getters["user/getAllUsers"]);
+const usersRef = toRef(store.getters["user/getAllUsers"]); // Convert toRef
+
+const users = computed(() => {
+  const usersArray = Array.isArray(usersRef.value) ? usersRef.value : [];
+  return usersArray.filter((user) => user.userRole.toLowerCase() === "user");
+});
 
 const deleteUser = async (user) => {
   try {

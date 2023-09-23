@@ -43,11 +43,7 @@
               class="flex-1 bg-red-500 text-black font-medium rounded-lg p-2 mr-2 opacity-0 group-hover:opacity-100">
               Delete
             </button>
-            <button
-              @click="editCar(car.id)"
-              class="flex-1 bg-yellow-400 text-black font-medium rounded-lg p-2 opacity-0 group-hover:opacity-100">
-              Edit
-            </button>
+           
           </div>
         </div>
       </li>
@@ -74,10 +70,6 @@ const formatDate = (dateString) => {
   }
 };
 
-const editCar = async (carId) => {
-  await store.dispatch("car/fetchCarById", carId);
-  router.push({ path: `admin/admincars/edit/${carId}` });
-};
 const emit = defineEmits(["delete-car"]);
 const deleteCar = (carId) => {
   var answer = confirm("Do you really want to delete the car?");

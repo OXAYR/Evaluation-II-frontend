@@ -1,5 +1,5 @@
 <template>
-  <AdminCarList :cars="allCars" @delete-car="deleteCar" />
+  <OwnerCarList :cars="allCars" @delete-car="deleteCar" />
 </template>
 
 <script setup>

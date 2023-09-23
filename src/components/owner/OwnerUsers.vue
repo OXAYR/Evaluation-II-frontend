@@ -1,9 +1,9 @@
 <template>
   <div
     class="text-black"
-    :class="{ 'lg:mr-96': currentPath === '/admin/users' }">
+    :class="{ 'lg:mr-96': currentPath === '/owner/users' }">
     <h1
-      v-if="currentPath === '/admin/users'"
+      v-if="currentPath === '/owner/users'"
       class="font-bold text-2xl my-8 sm:text-3xl text-left">
       Users
     </h1>

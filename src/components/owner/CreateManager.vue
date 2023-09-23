@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card bg-white mt-8 sm:mt-16 md:mt-32 Login px-4 sm:px-8 py-6 md:py-11 max-w-xs mx-auto">
+    class="card bg-white mt-6 px-4 sm:px-8 py-96 h-full md:py-11 max-w-xs mx-auto">
     <h2 class="text-3xl font-medium text-center">Create Manager</h2>
     <form enctype="multipart/form-data">
       <input
@@ -29,7 +29,7 @@
       {{ validationErrors.confirmPassword }}
     </p>
     <button
-      class="mt-4 px-4 sm:px-8 py-2 sm:py-3 text-white bg-blue hover:bg-lightBlue rounded-full"
+      class="mt-4 px-4 sm:px-8 py-2 sm:py-3 text-white font-medium bg-black hover:bg-gray-900 rounded"
       @click="toValidateForm(form)">
       Register Manager
     </button>

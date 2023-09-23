@@ -46,6 +46,7 @@ const sidebarLinks = computed(() => {
     { to: `/${userRole}`, text: "Dashboard" },
     { to: `/${userRole}/vehicles`, text: "Vehicles" },
     { to: `/${userRole}/bookings`, text: "Bookings" },
+    { to: `/${userRole}/users`, text: "Users" },
   ];
 });
 </script>

@@ -14,6 +14,8 @@ import Reservations from "@/components/user/Reservations.vue";
 import Users from "@/components/admin/Users.vue";
 import AllReservations from "@/components/admin/AllReservations.vue";
 import Dashboard from "@/views/adminviews/DashBoardView.vue";
+import OwnerDashboard from "@/views/ownerviews/OwnerDashBoardView.vue";
+import OwnerUsers from "@/components/owner/OwnerUsers.vue";
 
 const routes = [
   {
@@ -102,7 +104,7 @@ const routes = [
       {
         path: "",
         name: "dashboard",
-        component: Dashboard,
+        component: OwnerDashboard,
       },
       {
         path: "vehicles",
@@ -111,7 +113,7 @@ const routes = [
       },
       {
         path: "users",
-        component: Users,
+        component: OwnerUsers,
       },
       {
         path: "bookings",

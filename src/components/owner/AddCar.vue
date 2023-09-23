@@ -1,11 +1,11 @@
 <template>
   <div class="ml-4 lg:ml-12">
-    <div class="my-5 flex flex-col items-center">
+    <div class="my-5 flex flex-col card items-center">
+      <h1 class="font-bold text-2xl sm:text-3xl mt-5 text-silver text-center">
+        Add a Car
+      </h1>
       <div
-        class="max-w-md flex flex-wrap justify-between w-full bg-white rounded-lg shadow-md p-4 sm:p-6">
-        <h1 class="font-bold text-2xl sm:text-3xl my-5 text-silver">
-          "Add a Car" 
-        </h1>
+        class="max-w-md flex flex-wrap justify-between w-full bg-white rounded-lg p-4 sm:p-6">
         <div class="mb-4 w-full">
           <label for="name" class="block text-sm font-bold text-silver"
             >Name</label
@@ -92,7 +92,7 @@
         </div>
         <p v-if="error.length" class="text-red-600 text-sm">{{ error }}</p>
         <button
-          class="mt-4 w-full py-2 bg-lightBlue font-bold rounded text-black font-serif bg-yellow-300 hover:bg-yellow-400"
+          class="mt-4 w-full py-2 bg-lightBlue font-bold rounded border bg-black text-white hover:bg-gray-900"
           @click="validateCar()">
           Add Car
         </button>
@@ -145,7 +145,7 @@ const validateCar = async () => {
     car.make !== "" &&
     car.color !== ""
   ) {
-     await store.dispatch("car/addCar", car.value);
+    await store.dispatch("car/addCar", car.value);
     router.push("/owner");
   } else {
     error.value = "Please fill in all fields.";

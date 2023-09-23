@@ -14,5 +14,5 @@
 </template>
 
 <script setup>
-import Users from "@/components/owner/Users.vue";
+import Users from "@/components/owner/OwnerUsers.vue";
 </script>

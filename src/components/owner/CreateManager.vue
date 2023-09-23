@@ -1,7 +1,7 @@
 <template>
   <div
     class="card bg-white mt-8 sm:mt-16 md:mt-32 Login px-4 sm:px-8 py-6 md:py-11 max-w-xs mx-auto">
-    <h2 class="text-3xl font-medium text-center">Sign Up</h2>
+    <h2 class="text-3xl font-medium text-center">Create Manager</h2>
     <form enctype="multipart/form-data">
       <input
         type="text"

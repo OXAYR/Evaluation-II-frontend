@@ -55,9 +55,9 @@ onMounted(async () => {
 
 const toggleUserReservations = (index) => {
   if (expandedRow.value === index) {
-    expandedRow.value = null; // Collapse the row if it's already expanded
+    expandedRow.value = null; 
   } else {
-    expandedRow.value = index; // Expand the clicked row
+    expandedRow.value = index; 
   }
 };
 </script>

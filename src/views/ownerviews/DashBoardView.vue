@@ -12,6 +12,7 @@
 
     <div
       class="flex flex-col gap-4 lg:flex-row justify-evenly sm:items-start my-4">
+      <CreateManager />
       <AddCar />
 
       <div class="hidden md:block">
@@ -33,4 +34,5 @@ import OwnerCarListView from "./OwnerCarListView.vue";
 import UserView from "./UserView.vue";
 import ReservationsView from "@/views/ownerviews/ReservationView.vue";
 import AddCar from "@/components/owner/AddCar.vue";
+import CreateManager from "@/components/owner/CreateManager.vue";
 </script>

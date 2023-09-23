@@ -42,7 +42,7 @@ console.log("in the component reservations---->:", reservations.value);
 const formatDate = (dateString) => {
   if (dateString) {
     const date = new Date(dateString);
-    return date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear();
+    return date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
   }
 };
 

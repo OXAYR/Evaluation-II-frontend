@@ -4,7 +4,7 @@
       <div
         class="max-w-md flex flex-wrap justify-between w-full bg-white rounded-lg shadow-md p-4 sm:p-6">
         <h1 class="font-bold text-2xl sm:text-3xl my-5 text-silver">
-          {{ isUpdate ? "Update Car" : "Add a Car" }}
+          "Add a Car" 
         </h1>
         <div class="mb-4 w-full">
           <label for="name" class="block text-sm font-bold text-silver"
@@ -94,7 +94,7 @@
         <button
           class="mt-4 w-full py-2 bg-lightBlue font-bold rounded text-black font-serif bg-yellow-300 hover:bg-yellow-400"
           @click="validateCar()">
-          {{ isUpdate ? "Update" : "Add" }} Car
+          Add Car
         </button>
       </div>
     </div>
@@ -103,25 +103,17 @@
 
 <script setup>
 import { useStore } from "vuex";
-import { ref, computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
-const route = useRoute();
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 const router = useRouter();
-const currentRoute = ref(route.path);
 const store = useStore();
-const selectedCar = computed(() => store.getters["car/getSelectedCar"]);
-
-const isUpdate = computed(() => {
-  return currentRoute.value.includes("/edit/");
-});
-
 const car = ref({
-  name: isUpdate.value ? selectedCar.value?.name : "",
-  model: isUpdate.value ? selectedCar.value?.model : new Date(),
-  rent: isUpdate.value ? selectedCar.value?.rent : null,
-  type: isUpdate.value ? selectedCar.value?.type : "",
-  make: isUpdate.value ? selectedCar.value?.make : "",
-  color: isUpdate.value ? selectedCar.value?.color : "",
+  name: "",
+  model: new Date(),
+  rent: null,
+  type: "",
+  make: "",
+  color: "",
 });
 
 let error = ref("");
@@ -153,13 +145,8 @@ const validateCar = async () => {
     car.make !== "" &&
     car.color !== ""
   ) {
-    isUpdate.value
-      ? await store.dispatch("car/updateCar", {
-          indx: selectedCar.value._id,
-          updateCar: car.value,
-        })
-      : await store.dispatch("car/addCar", car.value);
-    router.push("/admin");
+     await store.dispatch("car/addCar", car.value);
+    router.push("/owner");
   } else {
     error.value = "Please fill in all fields.";
   }

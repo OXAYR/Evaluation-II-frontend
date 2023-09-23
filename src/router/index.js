@@ -75,12 +75,12 @@ const routes = [
         component: Dashboard,
       },
       {
-        path: "admincars",
+        path: "vehicles",
         name: "adminCarList",
         component: AdminCarListView,
       },
       {
-        path: "admincars/edit/:id",
+        path: "vehicles/edit/:id",
         component: AddCar,
       },
       {
@@ -88,7 +88,33 @@ const routes = [
         component: Users,
       },
       {
-        path: "reservations",
+        path: "bookings",
+        component: AllReservations,
+      },
+    ],
+  },
+
+  {
+    path: "/owner",
+    name: "owner",
+    component: AdminLayout,
+    children: [
+      {
+        path: "",
+        name: "dashboard",
+        component: Dashboard,
+      },
+      {
+        path: "vehicles",
+        name: "ownercarlist",
+        component: AdminCarListView,
+      },
+      {
+        path: "users",
+        component: Users,
+      },
+      {
+        path: "bookings",
         component: AllReservations,
       },
     ],

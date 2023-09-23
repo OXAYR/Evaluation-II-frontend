@@ -78,7 +78,7 @@ const filteredCars = props.cars.filter((car) => car.managerId === _id);
 
 const editCar = async (carId) => {
   await store.dispatch("car/fetchCarById", carId);
-  router.push({ path: `admin/admincars/edit/${carId}` });
+  router.push({ path: `admin/vehicles/edit/${carId}` });
 };
 const emit = defineEmits(["delete-car"]);
 const deleteCar = (carId) => {

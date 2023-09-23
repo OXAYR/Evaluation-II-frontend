@@ -43,6 +43,11 @@ const routes = [
         component: CarListView,
       },
       {
+        path: "cars",
+        name: "cars",
+        component: CarListView,
+      },
+      {
         path: "account",
         name: "Account",
         component: AccountSettings,

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="fixed top-4 left-4 z-50">
+    <div id="sideBar" class="fixed top-4 left-4 z-50">
       <button
         @click="toggleSidebar"
         class="block text-silver text-3xl cursor-pointer focus:outline-none lg:hidden">

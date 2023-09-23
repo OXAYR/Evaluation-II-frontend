@@ -24,12 +24,6 @@
         placeholder="Confirm Password"
         v-model="form.confirmPassword"
         class="mt-4 p-2 border border-gray-300 rounded-md w-full" />
-      <!-- <input
-        type="file"
-        name="profileImage"
-        @change="onFileChange"
-        accept="image/*"
-      /> -->
     </form>
     <p v-if="validationErrors.confirmPassword" class="text-red text-sm">
       {{ validationErrors.confirmPassword }}
@@ -37,7 +31,7 @@
     <button
       class="mt-4 px-4 sm:px-8 py-2 sm:py-3 text-white bg-blue hover:bg-lightBlue rounded-full"
       @click="toValidateForm(form)">
-      Register
+      Register Manager
     </button>
   </div>
 </template>
@@ -51,7 +45,7 @@ const form = ref({
   name: "",
   email: "",
   password: "",
-  userRole: "user",
+  userRole: "admin",
 });
 
 const confirmPassword = ref("");
@@ -66,9 +60,7 @@ const store = useStore();
 const router = useRouter();
 const toValidateForm = (obj) => {
   validationErrors.value = [];
-  const usernamePattern = new RegExp(
-    "^(?=.*[0-9!@#$%^&*()_+{}[\\]:;<>,.?~\\/\\-=\\'|\"]).*$"
-  );
+  const usernamePattern = new RegExp("/^[A-Z][^\s]*$/");
   const passwordPattern = new RegExp(
     "^(?=.*[A-Z])(?=.*[0-9!@#$%^&*()_+{}[\\]:;<>,.?~\\/\\-=\\'|\"]).{8,}$"
   );
@@ -102,7 +94,7 @@ const toStoreForm = async (obj) => {
   ) {
     console.log("In the component to store--->", form.value);
     await store.dispatch("user/registerUser", form.value);
-    if (!validationErrors.value) router.push("/");
+    if (!validationErrors.value) router.push("/owner");
   }
 };
 </script>

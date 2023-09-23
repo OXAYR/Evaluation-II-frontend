@@ -20,42 +20,32 @@
       </div>
       <div id="sideBar" class="mt-24">
         <router-link
-          to="/admin"
+          v-for="(link, index) in sidebarLinks"
+          :key="index"
+          :to="link.to"
           class="mb-7 text-silver block rounded-xl py-3 px-12 font-bold text-xl"
-          >Dashboard</router-link
-        >
-        <router-link
-          to="/admin/admincars"
-          class="mb-7 text-silver rounded-xl py-3 px-12 block font-bold text-xl"
-          >Cars</router-link
-        >
-        <router-link
-          to="/admin/users"
-          class="mb-7 text-silver rounded-xl py-3 px-12 block font-bold text-xl"
-          >Users</router-link
-        >
-        <router-link
-          to="/admin/reservations"
-          class="mb-2 text-silver rounded-xl py-3 px-12 block font-bold text-xl"
-          >Reservations</router-link
+          >{{ link.text }}</router-link
         >
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: "SideBar",
-  data() {
-    return {
-      isSidebarOpen: false,
-    };
-  },
-  methods: {
-    toggleSidebar() {
-      this.isSidebarOpen = !this.isSidebarOpen;
-    },
-  },
+<script setup>
+import { ref, computed } from "vue";
+
+const { userRole } = JSON.parse(localStorage.getItem("user"));
+const isSidebarOpen = ref(false);
+
+const toggleSidebar = () => {
+  isSidebarOpen.value = !isSidebarOpen.value;
 };
+
+const sidebarLinks = computed(() => {
+  return [
+    { to: `/${userRole}`, text: "Dashboard" },
+    { to: `/${userRole}/vehicles`, text: "Vehicles" },
+    { to: `/${userRole}/bookings`, text: "Bookings" },
+  ];
+});
 </script>

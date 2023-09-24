@@ -12,8 +12,10 @@
 
     <div
       class="flex flex-col gap-4 flex-wrap lg:flex-row justify-between sm:items-start my-4">
-      <AddCar />
-      <CreateManager />
+      <AddCar class="w-2/3" />
+      <div class="mt-14 mr-16">
+        <CreateManager />
+      </div>
     </div>
     <div>
       <div class="hidden ml-12 md:block"><UserView class="w-full" /></div>

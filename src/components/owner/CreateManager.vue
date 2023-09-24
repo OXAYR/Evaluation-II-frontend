@@ -1,6 +1,5 @@
 <template>
-  <div
-    class="card bg-white mt-6 px-4 sm:px-8 py-96 h-full md:py-11 max-w-xs mx-auto">
+  <div class="card bg-white mt-6 px-4 sm:px-8 md:py-11 max-w-xs mx-auto">
     <h2 class="text-3xl font-bold text-center">Create Manager</h2>
     <form enctype="multipart/form-data">
       <input
@@ -25,9 +24,9 @@
         v-model="confirmPassword"
         class="mt-4 p-2 border border-gray-300 rounded-md w-full" />
     </form>
-    <p v-if="validationErrors.confirmPassword" class="text-red text-sm">
+    <!-- <p v-if="validationErrors.confirmPassword" class="text-red text-sm">
       {{ validationErrors.confirmPassword }}
-    </p>
+    </p> -->
     <button
       class="mt-4 px-4 sm:px-8 py-2 sm:py-3 text-white font-medium bg-black hover:bg-gray-900 rounded"
       @click="toValidateForm(form)">

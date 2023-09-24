@@ -1,7 +1,7 @@
 <template>
   <div class="ml-4 lg:ml-12">
     <div class="flex flex-col lg:flex-row card items-center">
-      <div class="lg:w-1/2 rounded bg-rose-500 py-20">
+      <div class="lg:w-1/2 rounded-xl bg-rose-500 py-20">
         <img class="rounded-lg" src="../../assets/updatecar.png" alt="" />
       </div>
       <div class="lg:w-1/2">

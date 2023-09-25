@@ -1,8 +1,9 @@
 <template>
   <div class="ml-4 lg:ml-12">
     <div class="flex flex-col lg:flex-row card items-center">
-      <div class="lg:w-1/2 rounded-xl bg-rose-500 py-20">
-        <img class="rounded-lg" src="../../assets/updatecar.png" alt="" />
+      <div
+        class="lg:w-1/2 rounded-xl bg-gradient-to-b from-white to-gray-300 py-20">
+        <img class="rounded-lg" src="../../assets/updateCar(1).png" alt="" />
       </div>
       <div class="lg:w-1/2">
         <h1 class="font-bold text-2xl sm:text-3xl mt-5 text-silver text-center">

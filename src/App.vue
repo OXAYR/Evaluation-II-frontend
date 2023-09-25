@@ -40,7 +40,7 @@ nav a {
 }
 
 #sideBar a.router-link-exact-active {
-  background-color: #ecebff;
+  background-color: #ffffff;
   color: #001233;
 }
 </style>

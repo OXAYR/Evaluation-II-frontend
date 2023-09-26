@@ -114,17 +114,20 @@
 
 <script setup>
 import { useStore } from "vuex";
-import { ref, computed } from "vue";
-import { useRouter } from "vue-router";
+import { ref, computed, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
+const route = useRoute();
 const store = useStore();
 const selectedCar = computed(() => store.getters["car/getSelectedCar"]);
 const reservation = ref({
   startDate: "",
   endDate: "",
 });
-
+const carId = route.params.carId;
 console.log("selected Car---->", selectedCar.value);
+console.log("current route---->", route.params);
+console.log("current route---->", carId);
 
 let error = ref("");
 
@@ -150,6 +153,8 @@ const validateReservation = async () => {
     error.value = "Please fill in all fields.";
   }
 };
+
+onMounted(() => store.dispatch("car/fetchCarById", carId));
 </script>
 
 <style scoped></style>

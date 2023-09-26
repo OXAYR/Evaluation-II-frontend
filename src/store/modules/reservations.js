@@ -38,8 +38,10 @@ export default {
       console.log("reservation in the setter ", reservation);
       state.allReservations.bookings = reservation;
     },
-    DELETE_RESERVATION_EL(state, reservation) {
-      state.reservation = reservation;
+    DELETE_RESERVATION_EL(state, bookingId) {
+      state.reservation.bookings = state.reservation.bookings.filter(
+        (reservation) => reservation.id !== bookingId
+      );
     },
   },
   actions: {
@@ -139,7 +141,7 @@ export default {
       }
     },
 
-    async deleteReservation({ commit }, id) {
+    async deleteReservation({ commit, state }, id) {
       try {
         console.log("payload in action removeToreservation", id);
         const { _id } = JSON.parse(localStorage.getItem("user"));
@@ -155,6 +157,7 @@ export default {
         //   "RESPONSE RECIEVED From remove reservation",
         //   data.data.reservations.bookings
         // );
+
         commit("SET_RESERVATION", data.data.reservations.bookings);
       } catch (error) {
         console.error("Error deleting item from reservation:", error);

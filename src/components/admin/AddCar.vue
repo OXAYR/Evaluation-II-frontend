@@ -80,19 +80,21 @@
           <label for="color" class="block text-sm font-bold text-silver"
             >Color</label
           >
-          <div class="color-picker flex gap-4 mt-3">
+          <div class="color-picker flex justify-center gap-5 mt-3">
             <div
               v-for="option in colorOptions"
               :key="option"
               @click="selectColor(option)"
               :style="{ backgroundColor: option }"
-              class="color-option w-8 h-8 rounded-full border border-grey cursor-pointer transition-transform transform hover:scale-110"
-              :class="{ 'border-black': car.color === option }"></div>
+              class="color-option w-9 h-9 rounded-full text-center border border-grey cursor-pointer transition-transform transform hover:scale-110"
+              :class="{ 'border-black': car.color === option }">
+              <p class="text-sm mt-9">{{ option }}</p>
+            </div>
           </div>
         </div>
         <p v-if="error.length" class="text-red-600 text-sm">{{ error }}</p>
         <button
-          class="mt-4 w-full py-2 bg-lightBlue font-bold rounded text-black font-serif bg-yellow-300 hover:bg-yellow-400"
+          class="mt-4 w-full py-2 bg-lightBlue font-bold rounded text-black font-serif bg-blue-300 hover:bg-blue-400"
           @click="validateCar()">
           {{ isUpdate ? "Update" : "Add" }} Car
         </button>
@@ -132,8 +134,6 @@ const colorOptions = [
   "black",
   "grey",
   "white",
-  "green",
-  "yellow",
   "skyBlue",
   "darkRed",
 ];

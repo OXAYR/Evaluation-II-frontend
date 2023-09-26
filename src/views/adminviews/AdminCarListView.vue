@@ -5,12 +5,12 @@
 <script setup>
 import AdminCarList from "@/components/admin/AdminCarList.vue";
 import { useStore } from "vuex";
-import { onMounted, computed, watchEffect } from "vue";
+import { onMounted, computed, watchEffect, watch } from "vue";
 
 const store = useStore();
 
-const allCars = computed(() => store.getters["car/getCars"]);
-
+const allCars = computed(() => store.getters["car/getSelectedCar"]);
+let shouldFetchFilteredCar = true;
 const deleteCar = (index) => {
   store.dispatch("car/deleteCar", index);
 };
@@ -18,8 +18,11 @@ const deleteCar = (index) => {
 watchEffect(() => {
   console.log("in the watcheffect----->", allCars.value);
 });
-
+const { _id } = JSON.parse(localStorage.getItem("user"));
 onMounted(() => {
-  store.dispatch("car/fetchCars");
+  if (shouldFetchFilteredCar) {
+    store.dispatch("car/fetchCarsByManagerId", _id);
+    shouldFetchFilteredCar = false;
+  }
 });
 </script>

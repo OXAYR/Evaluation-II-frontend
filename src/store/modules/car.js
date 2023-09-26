@@ -6,33 +6,45 @@ export default {
     car: {
       cars: [],
     },
-    filteredCar: {},
+    filteredCar: {
+      cars: [],
+    },
   },
   getters: {
     getCars(state) {
-      console.log("in the movie getter list----> ", state.car);
+      console.log("in the movie getter list----> ", state.car.cars);
       return state.car.cars;
     },
     getSelectedCar(state) {
-      console.log("in the selected car getter---->", state.filteredCar);
-      return state.filteredCar;
+      console.log("in the selected car getter---->", state.filteredCar.cars);
+      return state.filteredCar.cars;
     },
   },
   mutations: {
     SET_CAR_LIST(state, payload) {
-      console.log("in the car setter--->", payload.data.cars);
-      state.car.cars = payload.data.cars;
+      console.log("in the car setter--->", payload);
+      state.car.cars = payload;
+      console.log.error("if");
       console.log("in the car setter--->", state.car.cars);
     },
-    SET_FILTERED_CAR(state, { data }) {
-      console.log("in the filteredd car setter--->", data.car);
-      state.filteredCar = data.car;
-      console.log("in the filteredd car setter--->", state.filteredCar);
+    SET_FILTERED_CAR(state, data) {
+      console.log("in the filteredd car setter--->", data);
+
+      state.filteredCar.cars = data;
+      console.log("in the filteredd car setter--->", state.filteredCar.cars);
+    },
+    ADD_CAR(state, data) {
+      console.log("in the add car setter--->", data);
+
+      state.filteredCar.cars = [...state.filteredCar.cars, data];
+      console.log("in the add car setter--->", state.filteredCar.cars);
     },
 
     REMOVE_CAR(state, id) {
-      console.log("in the mutatuion", id);
-      state.car.cars = state.car.cars.filter((car) => car.id !== id);
+      console.log("in the mutation of remove car---------------->", id);
+      state.filteredCar.cars = state.filteredCar.cars.filter(
+        (car) => car._id !== id
+      );
     },
     UPDATE_CAR(state, id, data) {
       const finded = state.car.cars.find(id);
@@ -41,7 +53,7 @@ export default {
     },
   },
   actions: {
-    async addCar(_, payload) {
+    async addCar({ commit }, payload) {
       try {
         const { _id } = JSON.parse(localStorage.getItem("user"));
         console.log("token---->");
@@ -54,16 +66,17 @@ export default {
         };
         const { data } = await axios.post("/cars", newPayload, config);
         console.log("car created:", data);
+        commit("ADD_CAR", data.data);
       } catch (error) {
-        console.error("Error creating movie:", error);
-        alert(error.response.data.message);
+        // console.error("Error creating movie:", error);
+        // alert(error.response.data.message);
       }
     },
 
     async fetchCarById({ commit }, id) {
       try {
         const token = user.state.user.token;
-        console.log("id in the fetch----> ", id);
+        console.log("id in the fetch----> ", id.carId);
         const config = {
           headers: {
             "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
@@ -72,7 +85,7 @@ export default {
         };
         const { data } = await axios.get(`/cars/${id}`, config);
         console.log(data);
-        commit("SET_FILTERED_CAR", data);
+        commit("SET_FILTERED_CAR", data.data.car);
       } catch (error) {
         console.error("Error fetching cars:", error);
         // alert(error.response.data.message);
@@ -94,7 +107,7 @@ export default {
         await axios.delete(`/cars/${id}`, config);
       } catch (error) {
         console.error("Error deleting car:", error);
-        alert(error.response.data.message);
+        // alert(error.response.data.message);
       }
     },
 
@@ -136,6 +149,24 @@ export default {
       }
     },
 
+    async fetchCarsByManagerId({ commit }, id) {
+      try {
+        console.log("id in the fetch----> ", id);
+        const config = {
+          headers: {
+            "x-access-token": JSON.parse(localStorage.getItem("userAuth")),
+            "Content-Type": "application/json",
+          },
+        };
+        const { data } = await axios.get(`/cars/manager/${id}`, config);
+        console.log(data.data.cars);
+        if (data) commit("SET_FILTERED_CAR", data.data.cars);
+      } catch (error) {
+        console.error("Error fetching cars:", error);
+        // alert(error.response.data.message);
+      }
+    },
+
     async fetchCars({ commit }) {
       try {
         const token = JSON.parse(localStorage.getItem("userAuth"));
@@ -148,10 +179,10 @@ export default {
         };
         const { data } = await axios.get("/cars", config);
         console.log(data);
-        commit("SET_CAR_LIST", data);
+        commit("SET_CAR_LIST", data.data.cars);
       } catch (error) {
         console.error("Error fetching cars:", error);
-        alert(error.response.data.message);
+        // alert(error.response.data.message);
       }
     },
   },

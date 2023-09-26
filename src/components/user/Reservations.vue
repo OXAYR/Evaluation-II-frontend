@@ -54,8 +54,10 @@ const deleteReservation = (reservationId) => {
 
 const formatDate = (dateString) => {
   if (dateString) {
+    console.log(dateString);
     const date = new Date(dateString);
-    return date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+    const  month  = parseInt(date.getMonth())+1
+    return date.getDate() + "/" + month+ "/" + date.getFullYear();
   }
 };
 const { _id } = JSON.parse(localStorage.getItem("user"));

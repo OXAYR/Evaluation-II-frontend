@@ -4,14 +4,14 @@
     <ul
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
       <li
-        v-for="car in filteredCars"
-        :key="car.id"
+        v-for="car in cars"
+        :key="car._id"
         class="bg-blue shadow-md rounded-lg group relative hover:shadow-lg">
         <div class="relative">
           <img
             src="../../assets/car.png"
             alt="car image"
-            class="w-full h-40 object-cover rounded-t-lg bg-white" />
+            class="w-full h-40 object-cover rounded-t-lg" />
         </div>
         <div class="bg-white p-4 rounded-b-lg">
           <div class="flex justify-between">
@@ -35,16 +35,18 @@
             Color:
             <div
               class="ml-2 w-3 h-3 mt-1 rounded-3xl"
-              :style="{ background: car.color }" />
+              :style="{ background: car.color }">
+              <p class="ml-4">{{ car.color }}</p>
+            </div>
           </div>
           <div class="flex mt-4">
             <button
-              @click="deleteCar(car.id)"
-              class="flex-1 bg-rose-500 text-black font-medium rounded-lg p-2 mr-2 opacity-0 group-hover:opacity-100">
+              @click="deleteCar(car._id)"
+              class="flex-1 bg-red-500 text-black font-medium rounded-lg p-2 mr-2 opacity-0 group-hover:opacity-100">
               Delete
             </button>
             <button
-              @click="editCar(car.id)"
+              @click="editCar(car._id)"
               class="flex-1 bg-blue-400 text-black font-medium rounded-lg p-2 opacity-0 group-hover:opacity-100">
               Edit
             </button>
@@ -73,15 +75,14 @@ const formatDate = (dateString) => {
     return date.getFullYear();
   }
 };
-const { _id } = JSON.parse(localStorage.getItem("user"));
-const filteredCars = props.cars.filter((car) => car.managerId === _id);
 
 const editCar = async (carId) => {
   await store.dispatch("car/fetchCarById", carId);
-  router.push({ path: `admin/vehicles/edit/${carId}` });
+  router.push({ path: `admin/admincars/edit/${carId}` });
 };
 const emit = defineEmits(["delete-car"]);
 const deleteCar = (carId) => {
+  console.log(carId);
   var answer = confirm("Do you really want to delete the car?");
   if (answer) {
     emit("delete-car", carId);

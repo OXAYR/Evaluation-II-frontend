@@ -32,13 +32,18 @@ export default {
       console.log("in the filteredd car setter--->", state.filteredCar.cars);
     },
     ADD_CAR(state, data) {
-      console.log("in the add car setter--->", data);
-
-      const { userRole } = JSON.parse(localStorage("user"));
+      console.log("in the add car setter now--->", data);
+      const { userRole } = JSON.parse(localStorage.getItem("user"));
+      console.log(userRole);
       if (userRole.toLowerCase() === "manager")
         state.filteredCar.cars = [...state.filteredCar.cars, data];
-      else state.car.cars = [...state.car.cars, data];
-      console.log("in the add car setter--->", state.filteredCar.cars);
+      else if (userRole.toLowerCase() === "owner")
+        state.car.cars = [...state.car.cars, data];
+
+      console.log(
+        "in the add car setter after adding--->",
+        state.filteredCar.cars
+      );
     },
 
     REMOVE_CAR(state, id) {
@@ -69,7 +74,7 @@ export default {
         console.log("car created:", data);
         commit("ADD_CAR", data.data);
       } catch (error) {
-        // console.error("Error creating movie:", error);
+        console.error("Error creating movie:", error);
         // alert(error.response.data.message);
       }
     },

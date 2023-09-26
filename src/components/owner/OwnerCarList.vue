@@ -3,10 +3,9 @@
     <h1 class="font-bold text-2xl sm:text-3xl text-left">Cars You Manage</h1>
     <ul
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-      
       <li
         v-for="car in cars"
-        :key="car.id"
+        :key="car._id"
         class="bg-blue shadow-md rounded-lg group relative hover:shadow-lg">
         <div class="relative">
           <img
@@ -72,6 +71,7 @@ const formatDate = (dateString) => {
 
 const emit = defineEmits(["delete-car"]);
 const deleteCar = (carId) => {
+  console.log(carId);
   var answer = confirm("Do you really want to delete the car?");
   if (answer) {
     emit("delete-car", carId);

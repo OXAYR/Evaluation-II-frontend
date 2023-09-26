@@ -36,7 +36,10 @@ export default {
     ADD_CAR(state, data) {
       console.log("in the add car setter--->", data);
 
-      state.filteredCar.cars = [...state.filteredCar.cars, data];
+      const { userRole } = JSON.parse(localStorage("user"));
+      if (userRole.toLowerCase() === "manager")
+        state.filteredCar.cars = [...state.filteredCar.cars, data];
+      else state.car.cars = [...state.car.cars, data];
       console.log("in the add car setter--->", state.filteredCar.cars);
     },
 

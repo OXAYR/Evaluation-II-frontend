@@ -39,8 +39,9 @@ export default {
       state.allReservations.bookings = reservation;
     },
     DELETE_RESERVATION_EL(state, bookingId) {
+      console.log(bookingId);
       state.reservation.bookings = state.reservation.bookings.filter(
-        (reservation) => reservation.id !== bookingId
+        (reservation) => reservation.carId !== bookingId
       );
     },
   },
@@ -141,7 +142,7 @@ export default {
       }
     },
 
-    async deleteReservation({ commit, state }, id) {
+    async deleteReservation({ commit }, id) {
       try {
         console.log("payload in action removeToreservation", id);
         const { _id } = JSON.parse(localStorage.getItem("user"));
@@ -152,15 +153,15 @@ export default {
           },
         };
         // console.log('config ',config)
+        commit("DELETE_RESERVATION_EL", id);
         const { data } = await axios.delete(`/reservations/${id}`, config, _id);
         // console.log(
         //   "RESPONSE RECIEVED From remove reservation",
         //   data.data.reservations.bookings
         // );
-
-        commit("SET_RESERVATION", data.data.reservations.bookings);
+        console.log(data.data.reservations.bookings);
       } catch (error) {
-        console.error("Error deleting item from reservation:", error);
+        // console.error("Error deleting item from reservation:", error);
         //alert(error.response.data.message);
       }
     },

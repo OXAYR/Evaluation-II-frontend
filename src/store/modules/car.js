@@ -24,8 +24,6 @@ export default {
     SET_CAR_LIST(state, payload) {
       console.log("in the car setter--->", payload);
       state.car.cars = payload;
-      console.log.error("if");
-      console.log("in the car setter--->", state.car.cars);
     },
     SET_FILTERED_CAR(state, data) {
       console.log("in the filteredd car setter--->", data);
